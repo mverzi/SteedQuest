@@ -49,11 +49,26 @@ class Overworld {
         })
     }
 
-    init(){
-        this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+    bindHeroPositionCheck() {
+        document.addEventListener("PersonWalkingComplete", e => {
+            if(e.detail.whoId === "hero"){
+                //Check for events as the player moves the hero around
+                this.map.checkForFootstepCutscene();
+            }
+        })
+    }
+
+    startMap(mapConfig) {
+        this.map = new OverworldMap(mapConfig);
+        this.map.overworld = this;
         this.map.mountObjects();
+    }
+
+    init(){
+        this.startMap(window.OverworldMaps.ForestRoom);
 
         this.bindActionInput();
+        this.bindHeroPositionCheck();
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
@@ -62,10 +77,6 @@ class Overworld {
         this.startGameLoop();
         
         this.map.startCutscene([
-            { who:"hero", type: "walk", direction: "down" },
-            { who:"hero", type: "walk", direction: "down" },
-            { who:"npcA", type: "walk", direction: "left" },
-            { who:"npcA", type: "stand", direction: "up",  time: 800 },
             { type: "textMessage", text: "Hello there!" }
         ]);
 
