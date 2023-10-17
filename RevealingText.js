@@ -17,7 +17,7 @@ class RevealingText {
                 this.revealOneCharacter(list);
             }, next.delayAfter)
         } else {
-            isDone = true;
+            this.isDone = true;
         }
     }
 
