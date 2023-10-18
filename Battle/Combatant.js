@@ -60,10 +60,60 @@ class Combatant {
         this.hudElement.setAttribute("data-active", this.isActive);
         this.horseElement.setAttribute("data-active", this.isActive);
 
+        //update HP and XP
         this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`)
         this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`)
 
+        //update horse level
         this.hudElement.querySelector(".Combatant_level").innerText = this.level;
+
+        //update status effect
+        const statusElement = this.hudElement.querySelector(".Combatant_status");
+        if(this.status){
+            statusElement.innerText = this.status.type;
+            statusElement.style.display = "block";
+        } else {
+            statusElement.innerText = "";
+            statusElement.style.display = "none";
+        }
+    }   
+
+    getReplacedEvents(originalEvents){
+
+        if(this.status?.type === "spooky" && utils.randomFromArray([true, false, false])) {
+            return [
+                { type: "textMessage", text: `${this.name} spooks at the wind!` }
+            ]
+        }
+
+        return originalEvents;
+    }
+
+    getPostEvents(){
+        if(this.status?.type === "nuzzling bond"){
+            return [
+                { type: "textMessage", text: "Your horse nuzzles up to you!" },
+                { type: "stateChange", recover:  5, onCaster: true }
+            ]
+        }
+        return [];
+    }
+
+    decrementStatus(){
+        if (this.status?.expiresIn > 0){
+            this.status.expiresIn -= 1;
+        
+        if(this.status.expiresIn === 0){
+            this.update({
+                status: null
+            })
+            return {
+                type: "textMessage",
+                text: "Status expired!"
+                }
+            }
+        }
+        return null;
     }
 
     init(container) {
