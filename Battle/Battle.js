@@ -12,10 +12,20 @@ class Battle {
                 status: { type: "nuzzling bond"},
                 isPlayerControlled: true
             }, this),
+            "player2": new Combatant({
+                ...Horses.n003,
+                team: "player",
+                hp: 35,
+                maxHp: 50,
+                xp: 0,
+                maxXp: 100,
+                level: 1,
+                status: null,
+            }, this),
             "enemy1": new Combatant({
                 ...Horses.n002,
                 team: "enemy",
-                hp: 20,
+                hp: 1,
                 maxHp: 50,
                 xp: 20,
                 maxXp: 100,
@@ -23,7 +33,7 @@ class Battle {
                 status: null
             }, this),
             "enemy2": new Combatant({
-                ...Horses.n002,
+                ...Horses.n004,
                 team: "enemy",
                 hp: 20,
                 maxHp: 50,

@@ -2,6 +2,7 @@ window.Actions = {
   //Moves and Statuses
     damage1: {
       name: "Kick",
+      description: "Do some damage with a good kick!",
       success: [
         { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
         { type: "animation", animation: "spin"},
@@ -10,6 +11,7 @@ window.Actions = {
     },
     nuzzlingBondStatus: {
       name: "Nuzzle",
+      description: "Nuzzle up to regain some HP!",
       targetType: "friendly",
       success: [
         { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
@@ -18,6 +20,7 @@ window.Actions = {
     },
     spookedStatus: {
       name: "Spook",
+      description: "Spook your opponent!",
       success: [
         { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
         { type: "animation", animation: "spook", color: "#0f0f0f" },
