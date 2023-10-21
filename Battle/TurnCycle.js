@@ -18,7 +18,7 @@ class TurnCycle {
         enemy
       })
   
-      //Stop here if we are replacing this Pizza
+      //Stop here if we are replacing the horse
       if (submission.replacement) {
         await this.onNewEvent({
           type: "replace",

@@ -28,7 +28,7 @@ window.Horses = {
         type: HorseTypes.normal,
         src: "/images/characters/horses/n002-hero.png", 
         icon: "/images/icons/spicy.png", //to do, placeholder currently being used
-        actions: ["spookedStatus", "nuzzlingBondStatus", "damage1"]
+        actions: ["spookedStatus", "nuzzlingBondStatus", "damage1"],
     },
     "n004": {
         name: "Lightning",
