@@ -9,7 +9,7 @@ window.BattleAnimations = {
         element.classList.remove(animationClassName);
       }, { once:true });
   
-      //Continue battle cycle right around when the pizzas collide
+      //Continue battle cycle right around when the horses collide
       await utils.wait(100);
       onComplete();
     },

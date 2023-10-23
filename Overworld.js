@@ -65,7 +65,7 @@ class Overworld {
     }
 
     init(){
-        this.startMap(window.OverworldMaps.ForestRoom);
+        this.startMap(window.OverworldMaps.DemoRoom);
 
         this.bindActionInput();
         this.bindHeroPositionCheck();
@@ -76,11 +76,11 @@ class Overworld {
 
         this.startGameLoop();
         
-        this.map.startCutscene([
-            { type: "battle" }
-            //{ type: "changeMap", map: "DemoRoom" }
-            //{ type: "textMessage", text: "Hello there!" }
-        ]);
+        // this.map.startCutscene([
+        //     { type: "battle", enemyId: "ellie" }
+        //     //{ type: "changeMap", map: "DemoRoom" }
+        //     //{ type: "textMessage", text: "Hello there!" }
+        // ]);
 
     }
 

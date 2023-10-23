@@ -1,7 +1,8 @@
 class TurnCycle {
-    constructor({ battle, onNewEvent }) {
+    constructor({ battle, onNewEvent, onWinner }) {
       this.battle = battle;
       this.onNewEvent = onNewEvent;
+      this.onWinner = onWinner;
       this.currentTeam = "player"; //or "enemy"
     }
   
@@ -33,6 +34,7 @@ class TurnCycle {
       }
   
       if (submission.instanceId) {
+        this.battle.usedInstanceIds[submission.instanceId] = true;
         this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
       }
   
@@ -55,6 +57,23 @@ class TurnCycle {
         await this.onNewEvent({ 
           type: "textMessage", text: `${submission.target.name} passed out!`
         })
+
+        if(submission.target.team === "enemy"){
+          const playerActiveHorseId = this.battle.activeCombatants.player;
+          const xp = submission.target.givesXp;
+
+          await this.onNewEvent({
+            type: "textMessage",
+            text: `Gained ${xp} XP!`
+          })
+
+          await this.onNewEvent({
+            type: "giveXp",
+            xp,
+            combatant: this.battle.combatants[playerActiveHorseId]
+          })
+        }
+        
       }
   
       //Do we have a winning team?
@@ -64,7 +83,7 @@ class TurnCycle {
           type: "textMessage",
           text: "Winner!"
         })
-        //END THE BATTLE -> TODO
+        this.onWinner(winner);
         return;
       }
         
@@ -126,10 +145,10 @@ class TurnCycle {
     }
   
     async init() {
-      // await this.onNewEvent({
-      //   type: "textMessage",
-      //   text: "The battle is starting!"
-      // })
+      await this.onNewEvent({
+        type: "textMessage",
+        text: "The battle is starting!"
+      })
   
       //Start the first turn!
       this.turn();

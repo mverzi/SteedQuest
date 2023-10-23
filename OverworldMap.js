@@ -121,7 +121,9 @@ window.OverworldMaps = {
                     events: [
                       { type: "textMessage", text: "I'm busy..", faceHero: "npcA" },
                       { type: "textMessage", text: "Leave me alone!" },
-                      { who: "hero", type: "walk", direction: "up" }
+                      { type: "textMessage", text: "Oh, you want to battle, don't you?" },
+                      { type: "battle", enemyId: "ellie" }
+                      //{ who: "hero", type: "walk", direction: "up" }
                     ]
                   }
                 ]
@@ -130,6 +132,14 @@ window.OverworldMaps = {
                 x:utils.withGrid(8),
                 y: utils.withGrid(5),
                 src: "/images/characters/people/trainer1.png",
+                talking: [
+                  {
+                    events: [
+                      { type: "textMessage", text: "Bahahaha!", faceHero: "npcB" },
+                      { type: "battle", enemyId: "robert" }
+                    ]
+                  }
+                ]
                 // behaviorLoop: [
                 //     { type: "walk", direction: "left" },
                 //     { type: "stand", direction: "up", time: 800 },
