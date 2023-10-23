@@ -3,7 +3,7 @@ class PlayerState {
         this.horses = {
             "h1": {
                 horseId: "n001",
-                hp: 50,
+                hp: 1,
                 maxHp: 50,
                 xp: 0,
                 maxXp: 100,
@@ -12,7 +12,7 @@ class PlayerState {
             },
             "h2": {
                 horseId: "n003",
-                hp: 55,
+                hp: 1,
                 maxHp: 55,
                 xp: 0,
                 maxXp: 100,

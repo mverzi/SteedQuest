@@ -79,12 +79,22 @@ class TurnCycle {
       //Do we have a winning team?
       const winner = this.getWinningTeam();
       if (winner) {
-        await this.onNewEvent({
-          type: "textMessage",
-          text: "Winner!"
-        })
-        this.onWinner(winner);
-        return;
+        if(winner === "player"){
+          await this.onNewEvent({
+            type: "textMessage",
+            text: "Winner!"
+          })
+          this.onWinner(winner);
+          return;
+        }
+        else {
+            await this.onNewEvent({
+              type: "textMessage",
+              text: "You lost!"
+            })
+            this.onWinner(winner);
+            return;
+        }
       }
         
       //We have a dead target, but still no winner, so bring in a replacement
