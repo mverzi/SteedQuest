@@ -70,13 +70,17 @@ class OverworldEvent {
     }
 
     battle(resolve) {
-      const battle = new Battle({
-        enemy: Enemies[this.event.enemyId],
-        onComplete: () => {
-          resolve();
-        }
-      })
-      battle.init(document.querySelector(".game-container"));
+      const sceneTransition = new SceneTransition();
+      sceneTransition.init(document.querySelector(".game-container"), () => {
+        const battle = new Battle({
+          enemy: Enemies[this.event.enemyId],
+          onComplete: () => {
+            sceneTransition.fadeOut(); 
+            resolve();
+          }
+        })
+        battle.init(document.querySelector(".game-container"));
+      });
     }
   
     init() {

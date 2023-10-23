@@ -84,7 +84,7 @@ class Battle {
   
         //Populate first active horse
   
-        console.log(this)
+        //console.log(this)
         this.activeCombatants[team] = this.activeCombatants[team] || id
     }
 
@@ -149,6 +149,8 @@ class Battle {
               playerState.items = playerState.items.filter(item => {
                 return !this.usedInstanceIds[item.instanceId];
               })
+
+              utils.emitEvent("PlayerStateUpdated");
 
             }
             this.element.remove();

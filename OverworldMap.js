@@ -111,10 +111,10 @@ window.OverworldMaps = {
                 y: utils.withGrid(9),
                 src: "/images/characters/people/npc1.png",
                 behaviorLoop: [
-                    { type: "stand", direction: "left", time: 800},
-                    { type: "stand", direction: "up", time: 800 },
-                    { type: "stand", direction: "right", time: 1200 },
-                    { type: "stand", direction: "up", time: 300 },
+                    { type: "stand", direction: "left", time: 1800},
+                    { type: "stand", direction: "up", time: 1800 },
+                    { type: "stand", direction: "right", time: 1400 },
+                    { type: "stand", direction: "up", time: 1300 },
                 ],
                 talking: [
                   {

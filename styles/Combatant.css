@@ -110,7 +110,7 @@
   .Combatant_status[data-status="saucy"] {
     color: red;
   }
-  .Combatant_status[data-status="clumsy"] {
+  .Combatant_status[data-status="nuzzling-bond"] {
     background: #582a79;
   }
 
