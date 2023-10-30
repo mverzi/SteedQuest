@@ -46,6 +46,14 @@ window.Horses = {
         icon: "/images/icons/spicy.png", //to do, placeholder currently being used
         actions: ["damage1", "spookedStatus", "nuzzlingBondStatus"]
     },
+    "n006": {
+        name: "Honey",
+        description: "A sweet pony who would do anything to protect you.",
+        type: HorseTypes.normal,
+        src: "/images/characters/horses/n006.png", 
+        icon: "/images/icons/spicy.png", //to do, placeholder currently being used
+        actions: ["damage1", "spookedStatus", "nuzzlingBondStatus"]
+    },
 
 
 }
