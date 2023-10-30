@@ -8,7 +8,7 @@ class PlayerState {
                 xp: 0,
                 maxXp: 100,
                 level: 1,
-                status: { type: "nuzzling bond"},
+                status: null,
             },
             "h2": {
                 horseId: "n003",
@@ -34,6 +34,9 @@ class PlayerState {
             {actionId: "item_recoverStatus", instanceId: "item1"},
             {actionId: "item_recoverHp", instanceId: "item2"},
         ]
+        this.storyFlags = {
+            
+        }
     }
 
     swapLineup(oldId, incomingId) {

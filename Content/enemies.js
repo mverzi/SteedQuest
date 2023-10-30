@@ -20,7 +20,7 @@ window.Enemies = {
         src: "/images/characters/people/npc1.png",
         horses: {
          "a": {
-             hp: 1,
+             hp: 50,
              horseId: "n005",
              maxHp: 50,
              level: 1

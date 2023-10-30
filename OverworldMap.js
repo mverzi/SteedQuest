@@ -56,7 +56,10 @@ class OverworldMap {
           event: events[i],
           map: this,
         })
-        await eventHandler.init();
+        const result = await eventHandler.init();
+        if(result === "LOST_BATTLE"){
+          break;
+        }
       }
       this.isCutscenePlaying = false;
       //Reset NPCs to resume behavior
@@ -70,7 +73,14 @@ class OverworldMap {
         return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
       });
       if(!this.isCutscenePlaying && match && match.talking.length) {
-        this.startCutscene(match.talking[0].events);
+
+        const relevantScenario = match.talking.find(scenario => {
+          return (scenario.required || []).every(sf => {
+            return playerState.storyFlags[sf]
+          })
+        })
+
+        relevantScenario && this.startCutscene(relevantScenario.events);
       }
     }
 
@@ -119,11 +129,17 @@ window.OverworldMaps = {
                 ],
                 talking: [
                   {
+                    required: ["TALKED_TO_ROBERT"],
                     events: [
-                      { type: "textMessage", text: "I'm busy..", faceHero: "npcA" },
-                      { type: "textMessage", text: "Leave me alone!" },
-                      { type: "textMessage", text: "Oh, you want to battle, don't you?" },
-                      { type: "battle", enemyId: "ellie" }
+                      { type: "textMessage", text: "Isn't Robert over there kind of annoying?", faceHero: "npcA" },
+                    ]
+                  },
+                  {
+                    events: [
+                      { type: "textMessage", text: "Oh, you want to battle, don't you?", faceHero: "npcA" },
+                      { type: "battle", enemyId: "ellie" },
+                      { type: "addStoryFlag", flag: "DEFEATED_ELLIE" },
+                      { type: "textMessage", text: "Oh man, you're stronger than I thought.", faceHero: "npcA" },
                       //{ who: "hero", type: "walk", direction: "up" }
                     ]
                   }
@@ -137,7 +153,8 @@ window.OverworldMaps = {
                   {
                     events: [
                       { type: "textMessage", text: "Bahahaha!", faceHero: "npcB" },
-                      { type: "battle", enemyId: "robert" }
+                      { type: "addStoryFlag", flag: "TALKED_TO_ROBERT" }
+                      //{ type: "battle", enemyId: "robert" }
                     ]
                   }
                 ]
