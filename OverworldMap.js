@@ -165,7 +165,13 @@ window.OverworldMaps = {
                 //     { type: "walk", direction: "right" },
                 //     { type: "walk", direction: "down" }
                 // ]
-            })
+            }),
+              horseSpawner: new HorseSpawner({
+                x: utils.withGrid(2),
+                y: utils.withGrid(7),
+                storyFlag: "USED_HORSE_SPAWNER",
+                horses: ["n006", "n003"]
+              })
         },
         walls: {
             [utils.asGridCoords(7,6)] : true,

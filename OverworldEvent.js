@@ -100,6 +100,16 @@ class OverworldEvent {
       window.playerState.storyFlags[this.event.flag] = true;
       resolve();
     }
+
+    craftingMenu(resolve) {
+      const menu = new CraftingMenu({
+        horses: this.event.horses,
+        onComplete: () => {
+          resolve();
+        }
+      })
+      menu.init(document.querySelector(".game-container"));
+    }
   
     init() {
       return new Promise(resolve => {
