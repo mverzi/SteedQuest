@@ -108,6 +108,7 @@ class OverworldMap {
 
 window.OverworldMaps = {
     DemoRoom: {
+        id: "DemoRoom",
         lowerSrc: "/images/backgrounds/DemoLower.png",
         upperSrc: "/images/backgrounds/DemoUpper.png",
         gameObjects: {
@@ -205,13 +206,20 @@ window.OverworldMaps = {
           [utils.asGridCoords(5,10)]: [
             {
               events: [
-                { type: "changeMap", map: "ForestRoom" }
+                { 
+                  type: "changeMap", 
+                  map: "Street",
+                  x: utils.withGrid(29),
+                  y: utils.withGrid(9),
+                  direction: "down" 
+                }
               ]
             }
           ]
         }
     }, 
     ForestRoom: {
+        id: "ForestRoom",
         lowerSrc: "/images/backgrounds/ForestLower.png",
         upperSrc: "images/backgrounds/ForestUpper.png",
         gameObjects: {
@@ -233,6 +241,34 @@ window.OverworldMaps = {
                 }
               ]
             })
+        }
+    },
+    Street: {
+      id: "Street",
+        lowerSrc: "/images/maps/StreetLower.png",
+        upperSrc: "images/maps/StreetUpper.png",
+        gameObjects: {
+            hero: new Person({
+              isPlayerControlled: true,
+                x: utils.withGrid(30),
+                y: utils.withGrid(10),
+                src: "/images/characters/people/hero.png"
+            }),
+        },
+        cutsceneSpaces: {
+          [utils.asGridCoords(29,9)]: [
+            {
+              events: [
+                {
+                  type: "changeMap",
+                  map: "DemoRoom",
+                  x: utils.withGrid(5),
+                  y: utils.withGrid(10),
+                  direction: "up"
+                }
+              ]
+            }
+          ]
         }
     }
 }

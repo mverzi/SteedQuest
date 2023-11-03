@@ -68,18 +68,50 @@ class Overworld {
         })
     }
 
-    startMap(mapConfig) {
+    startMap(mapConfig, heroInitialState=null) {
         this.map = new OverworldMap(mapConfig);
         this.map.overworld = this;
         this.map.mountObjects();
+
+        if(heroInitialState){
+            const {hero} = this.map.gameObjects;
+            this.map.removeWall(hero.x, hero.y);
+            hero.x = heroInitialState.x;
+            hero.y = heroInitialState.y;
+            hero.direction = heroInitialState.direction;
+            this.map.addWall(hero.x, hero.y);
+        }
+
+        this.progress.mapId = mapConfig.id;
+        this.progress.startingHeroX = this.map.gameObjects.hero.x;
+        this.progress.startingHeroY = this.map.gameObjects.hero.y;
+        this.progress.startingHeroDirection = this.map.gameObjects.hero.direction;
+
     }
 
     init(){
+        //Progress tracker
+        this.progress = new Progress();
+
+        //Check for save data
+        let initialHeroState = null;
+        const saveFile = this.progress.getSaveFile();
+        if(saveFile) {
+            // this.progress.load();
+            // initialHeroState = {
+            //     x: this.progress.startingHeroX,
+            //     y: this.progress.startingHeroY,
+            //     direction: this.progress.startingHeroDirection,
+            // }
+        }
+
         this.hud = new Hud();
         this.hud.init(document.querySelector(".game-container"));
 
-        this.startMap(window.OverworldMaps.DemoRoom);
+        //Load first map, or map game saved on
+        this.startMap(window.OverworldMaps[this.progress.mapId], initialHeroState);
 
+        //Controls
         this.bindActionInput();
         this.bindHeroPositionCheck();
 
