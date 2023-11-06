@@ -1,7 +1,9 @@
 class OverworldMap {
     constructor(config) {
       this.overworld = null;
-      this.gameObjects = config.gameObjects;
+      this.gameObjects = {};
+      this.configObjects = config.configObjects;
+
       this.cutsceneSpaces = config.cutsceneSpaces || {};
       this.walls = config.walls || {};
   
@@ -33,18 +35,34 @@ class OverworldMap {
   
     isSpaceTaken(currentX, currentY, direction) {
       const {x,y} = utils.nextPosition(currentX, currentY, direction);
-      return this.walls[`${x},${y}`] || false;
+      if(this.walls[`${x},${y}`]){
+        return true;
+      }
+      return Object.values(this.gameObjects).find(obj => {
+        if(obj.x === x && obj.y === y) {return true};
+        if(obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition[1] === y) {
+          return true;
+        }
+        return false;
+      })
     }
   
     mountObjects() {
-      Object.keys(this.gameObjects).forEach(key => {
+      Object.keys(this.configObjects).forEach(key => {
 
-        let object = this.gameObjects[key];
+        let object = this.configObjects[key];
         object.id = key;
-  
-        //TODO: determine if this object should actually mount
-        object.mount(this);
-  
+
+        let instance;
+        if(object.type === "Person"){
+          instance = new Person(object);
+        }
+        if(object.type === "HorseSpawner"){
+          instance = new HorseSpawner(object);
+        }
+        this.gameObjects[key] = instance;
+        this.gameObjects[key].id = key;
+        instance.mount[this];
       })
     }
 
@@ -91,19 +109,6 @@ class OverworldMap {
         this.startCutscene(match[0].events);
       }
     }
-  
-    addWall(x,y) {
-      this.walls[`${x},${y}`] = true;
-    }
-    removeWall(x,y) {
-      delete this.walls[`${x},${y}`];
-    }
-    moveWall(wasX, wasY, direction) {
-      this.removeWall(wasX, wasY);
-      const {x,y} = utils.nextPosition(wasX, wasY, direction);
-      this.addWall(x,y);
-    }
-  
   }
 
 window.OverworldMaps = {
@@ -111,15 +116,17 @@ window.OverworldMaps = {
         id: "DemoRoom",
         lowerSrc: "/images/backgrounds/DemoLower.png",
         upperSrc: "/images/backgrounds/DemoUpper.png",
-        gameObjects: {
-            hero: new Person({
+        configObjects: {
+            hero: {
+                type: "Person",
                 isPlayerControlled: true,
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
-                src: "/images/characters/people/hero.png"
-            }),
-            npcA: new Person({
-                x:utils.withGrid(6),
+                //src: "/images/characters/people/hero.png"
+            },
+            npcA: {
+                type: "Person",
+                x: utils.withGrid(6),
                 y: utils.withGrid(9),
                 src: "/images/characters/people/npc1.png",
                 behaviorLoop: [
@@ -140,13 +147,14 @@ window.OverworldMaps = {
                       { type: "textMessage", text: "Oh, you want to battle, don't you?", faceHero: "npcA" },
                       { type: "battle", enemyId: "ellie" },
                       { type: "addStoryFlag", flag: "DEFEATED_ELLIE" },
-                      { type: "textMessage", text: "Oh man, you're stronger than I thought.", faceHero: "npcA" },
+                      { type: "textMessage", text: "Oh man, you're stronger than you look.", faceHero: "npcA" },
                       //{ who: "hero", type: "walk", direction: "up" }
                     ]
                   }
                 ]
-            }),
-            npcB: new Person({
+            },
+            npcB: {
+                type: "Person",
                 x:utils.withGrid(8),
                 y: utils.withGrid(5),
                 src: "/images/characters/people/trainer1.png",
@@ -158,7 +166,7 @@ window.OverworldMaps = {
                       //{ type: "battle", enemyId: "robert" }
                     ]
                   }
-                ]
+                ],
                 // behaviorLoop: [
                 //     { type: "walk", direction: "left" },
                 //     { type: "stand", direction: "up", time: 800 },
@@ -166,13 +174,14 @@ window.OverworldMaps = {
                 //     { type: "walk", direction: "right" },
                 //     { type: "walk", direction: "down" }
                 // ]
-            }),
-              horseSpawner: new HorseSpawner({
+            },
+              horseSpawner: {
+                type: "HorseSpawner",
                 x: utils.withGrid(2),
                 y: utils.withGrid(7),
                 storyFlag: "USED_HORSE_SPAWNER",
                 horses: ["n006", "n003"]
-              })
+              }
         },
         walls: {
             [utils.asGridCoords(7,6)] : true,
@@ -222,14 +231,16 @@ window.OverworldMaps = {
         id: "ForestRoom",
         lowerSrc: "/images/backgrounds/ForestLower.png",
         upperSrc: "images/backgrounds/ForestUpper.png",
-        gameObjects: {
-            hero: new Person({
+        configObjects: {
+            hero: {
+              type: "Person",
               isPlayerControlled: true,
-                x: utils.withGrid(7),
-                y: utils.withGrid(6),
-                src: "/images/characters/people/hero.png"
-            }),
-            npcA: new Person({
+              x: utils.withGrid(7),
+              y: utils.withGrid(6),
+              src: "/images/characters/people/hero.png"
+            },
+            npcA: {
+              type: "Person",
               x: utils.withGrid(10),
               y: utils.withGrid(8),
               src: "/images/characters/people/npc4.png",
@@ -240,20 +251,21 @@ window.OverworldMaps = {
                   ]
                 }
               ]
-            })
+            }
         }
     },
     Street: {
       id: "Street",
         lowerSrc: "/images/maps/StreetLower.png",
         upperSrc: "images/maps/StreetUpper.png",
-        gameObjects: {
-            hero: new Person({
+        configObjects: {
+            hero: {
+              type: "Person",
               isPlayerControlled: true,
-                x: utils.withGrid(30),
-                y: utils.withGrid(10),
-                src: "/images/characters/people/hero.png"
-            }),
+              x: utils.withGrid(30),
+              y: utils.withGrid(10),
+              src: "/images/characters/people/hero.png"
+            },
         },
         cutsceneSpaces: {
           [utils.asGridCoords(29,9)]: [
