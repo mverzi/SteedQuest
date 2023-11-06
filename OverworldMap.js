@@ -62,7 +62,7 @@ class OverworldMap {
         }
         this.gameObjects[key] = instance;
         this.gameObjects[key].id = key;
-        instance.mount[this];
+        instance.mount(this);
       })
     }
 
@@ -81,7 +81,7 @@ class OverworldMap {
       }
       this.isCutscenePlaying = false;
       //Reset NPCs to resume behavior
-      Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
+      //Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
     }
 
     checkForActionCutscene() {
@@ -122,7 +122,6 @@ window.OverworldMaps = {
                 isPlayerControlled: true,
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
-                //src: "/images/characters/people/hero.png"
             },
             npcA: {
                 type: "Person",
