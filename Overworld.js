@@ -89,24 +89,33 @@ class Overworld {
 
     }
 
-    init(){
+    async init(){
+
+        const container = document.querySelector(".game-container");
+
         //Progress tracker
         this.progress = new Progress();
 
+        //Title screen
+        this.titleScreen = new TitleScreen({
+            progress: this.progress
+        })
+        const useSaveFile = await this.titleScreen.init(container);
+
         //Check for save data
         let initialHeroState = null;
-        const saveFile = this.progress.getSaveFile();
-        if(saveFile) {
-            // this.progress.load();
-            // initialHeroState = {
-            //     x: this.progress.startingHeroX,
-            //     y: this.progress.startingHeroY,
-            //     direction: this.progress.startingHeroDirection,
-            // }
+        
+        if(useSaveFile) {
+            this.progress.load();
+            initialHeroState = {
+                x: this.progress.startingHeroX,
+                y: this.progress.startingHeroY,
+                direction: this.progress.startingHeroDirection,
+            }
         }
 
         this.hud = new Hud();
-        this.hud.init(document.querySelector(".game-container"));
+        this.hud.init(container);
 
         //Load first map, or map game saved on
         this.startMap(window.OverworldMaps[this.progress.mapId], initialHeroState);
