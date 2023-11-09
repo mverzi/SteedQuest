@@ -109,6 +109,11 @@ class OverworldEvent {
       resolve();
     }
 
+    removeStoryFlag(resolve){
+      window.playerState.storyFlags[this.event.flag] = false;
+      resolve();
+    }
+
     craftingMenu(resolve) {
       const menu = new CraftingMenu({
         horses: this.event.horses,
@@ -118,6 +123,11 @@ class OverworldEvent {
       })
       menu.init(document.querySelector(".game-container"));
     }
+
+    healHorsesHp(resolve) {
+      window.playerState.healHorsesHp(); 
+      resolve();
+  }
   
     init() {
       return new Promise(resolve => {

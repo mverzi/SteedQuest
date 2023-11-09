@@ -15,8 +15,8 @@ window.Enemies = {
         },
        } 
     },
-    "ellie": {
-        name: "Ellie",
+    "elora": {
+        name: "Elora",
         src: "/images/characters/people/npc1.png",
         horses: {
          "a": {

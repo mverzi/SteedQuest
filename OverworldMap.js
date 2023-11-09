@@ -253,33 +253,101 @@ window.OverworldMaps = {
             }
         }
     },
-    Street: {
-      id: "Street",
+    StartingMap: {
+      id: "StartingMap",
         lowerSrc: "/images/maps/StreetLower.png",
         upperSrc: "images/maps/StreetUpper.png",
         configObjects: {
             hero: {
               type: "Person",
               isPlayerControlled: true,
-              x: utils.withGrid(30),
+              x: utils.withGrid(),
               y: utils.withGrid(10),
-              src: "/images/characters/people/hero.png"
+              src: "/images/characters/people/hero.png",
             },
-        },
-        cutsceneSpaces: {
-          [utils.asGridCoords(29,9)]: [
-            {
-              events: [
+            npcA: {
+              type: "Person",
+              x: utils.withGrid(3),
+              y: utils.withGrid(9),
+              src: "/images/characters/people/npc1.png",
+              behaviorLoop: [
+                { type: "stand", direction: "left", time: 1800},
+                { type: "stand", direction: "down", time: 1800 },
+                { type: "stand", direction: "right", time: 1400 },
+                { type: "stand", direction: "down", time: 1300 },
+              ],
+              talking: [
                 {
-                  type: "changeMap",
-                  map: "DemoRoom",
-                  x: utils.withGrid(5),
-                  y: utils.withGrid(10),
-                  direction: "up"
+                  required: ["BATTLED_ELORA"],
+                  events: [
+                    { type: "textMessage", text: "You're stronger than you look! I will heal up Lucky for you.", faceHero: "npcA" },
+                    { type: "healHorsesHp" },
+                  ]
+                },
+                {
+                  events: [
+                    { type: "textMessage", text: "Welcome, traveler!", faceHero:"npcA" },
+                    { type: "textMessage", text: "You've arrived just in time for our enchanted battles. Are you here to participate?", faceHero:"npcA" },
+                    { type: "textMessage", text: "You must be! I see you already have your very own horse.", faceHero:"npcA" },
+                    { type: "textMessage", text: "Well, I won't keep you too long, but considering you've got a horse of your own...", faceHero:"npcA" },
+                    { type: "battle", enemyId: "elora" },
+                    { type: "addStoryFlag", flag: "BATTLED_ELORA" },
+                  ]
                 }
               ]
             }
-          ]
+        },
+        walls: {
+          [utils.asGridCoords(-1,8)] : true,
+          [utils.asGridCoords(-1,9)] : true,
+          [utils.asGridCoords(-1,10)] : true,
+          [utils.asGridCoords(-1,11)] : true,
+          [utils.asGridCoords(0,12)] : true,
+          [utils.asGridCoords(1,12)] : true,
+          [utils.asGridCoords(2,12)] : true,
+          [utils.asGridCoords(3,12)] : true,
+          [utils.asGridCoords(4,12)] : true,
+          [utils.asGridCoords(5,12)] : true,
+          [utils.asGridCoords(6,12)] : true,
+          [utils.asGridCoords(7,12)] : true,
+          [utils.asGridCoords(8,12)] : true,
+          [utils.asGridCoords(9,12)] : true,
+          [utils.asGridCoords(10,12)] : true,
+          [utils.asGridCoords(11,12)] : true,
+          [utils.asGridCoords(12,12)] : true,
+          [utils.asGridCoords(13,12)] : true,
+          [utils.asGridCoords(14,12)] : true,
+          [utils.asGridCoords(15,12)] : true,
+          [utils.asGridCoords(16,12)] : true,
+          [utils.asGridCoords(17,12)] : true,
+          [utils.asGridCoords(18,12)] : true,
+          [utils.asGridCoords(19,12)] : true,
+          [utils.asGridCoords(0,7)] : true,
+          [utils.asGridCoords(1,7)] : true,
+          [utils.asGridCoords(2,7)] : true,
+          [utils.asGridCoords(3,7)] : true,
+          [utils.asGridCoords(4,7)] : true,
+          [utils.asGridCoords(5,7)] : true,
+          [utils.asGridCoords(6,7)] : true,
+          [utils.asGridCoords(7,7)] : true,
+          [utils.asGridCoords(8,7)] : true,
+          [utils.asGridCoords(9,7)] : true,
+          [utils.asGridCoords(10,7)] : true,
+          [utils.asGridCoords(11,7)] : true,
+          [utils.asGridCoords(12,7)] : true,
+          [utils.asGridCoords(13,7)] : true,
+          [utils.asGridCoords(14,7)] : true,
+          [utils.asGridCoords(15,7)] : true,
+          [utils.asGridCoords(16,7)] : true,
+          [utils.asGridCoords(17,7)] : true,
+          [utils.asGridCoords(18,7)] : true,
+          [utils.asGridCoords(19,7)] : true,
+          [utils.asGridCoords(20,8)] : true,
+          [utils.asGridCoords(20,9)] : true,
+          [utils.asGridCoords(20,11)] : true,
+        },
+        cutsceneSpaces: {
+          
         }
     }
 }

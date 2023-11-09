@@ -10,24 +10,6 @@ class PlayerState {
                 level: 1,
                 status: null,
             },
-            // "h2": {
-            //     horseId: "n003",
-            //     hp: 55,
-            //     maxHp: 55,
-            //     xp: 0,
-            //     maxXp: 100,
-            //     level: 1,
-            //     status: null,
-            // },
-            // "h3": {
-            //     horseId: "n006",
-            //     hp: 60,
-            //     maxHp: 60,
-            //     xp: 0,
-            //     maxXp: 100,
-            //     level: 1,
-            //     status: null,
-            // },
         }
         this.lineup = ["h1"];
         this.items = [
@@ -37,6 +19,7 @@ class PlayerState {
         this.storyFlags = {
             
         }
+        console.log(this.storyFlags);
     }
 
     addHorse(horseId) {
@@ -67,6 +50,17 @@ class PlayerState {
         this.lineup = this.lineup.filter(id => id !== futureFrontId);
         this.lineup.unshift(futureFrontId);
         utils.emitEvent("LineupChanged");
+    }
+
+    healHorsesHp() {
+        for (const horseId of this.lineup) {
+            const horse = this.horses[horseId];
+            console.log(horse);
+            horse.hp = horse.maxHp;
+            console.log(horse.hp);
+        }
+        const hud = new Hud();
+        hud.init(document.querySelector(".game-container"));
     }
 
 }
