@@ -20,7 +20,7 @@ window.Horses = {
         type: HorseTypes.normal,
         src: "/images/characters/horses/n002.png",
         icon: "/images/icons/spicy.png", //to do, placeholder currently being used
-        actions: ["damage1", "nuzzlingBondStatus"]
+        actions: ["damage1", "nuzzlingBondStatus", "spookedStatus"]
     },
     "n003": {
         name: "Bandit",
@@ -28,7 +28,7 @@ window.Horses = {
         type: HorseTypes.normal,
         src: "/images/characters/horses/n003.png", 
         icon: "/images/icons/spicy.png", //to do, placeholder currently being used
-        actions: ["spookedStatus", "nuzzlingBondStatus", "damage1"],
+        actions: ["spookedStatus", "nuzzlingBondStatus", "damage1", "damage2"],
     },
     "n004": {
         name: "Lightning",

@@ -278,10 +278,18 @@ window.OverworldMaps = {
               ],
               talking: [
                 {
+                  required: ["HEALED_ELORA"],
+                  events: [
+                    { type: "textMessage", text: "You're strong, but you won't get very far with just one horse.", faceHero: "npcA" },
+                    { type: "textMessage", text: "Have you seen an ancient pedestal yet? Upon it rests a mysterious egg. Nobody has been able to open them though...", faceHero: "npcA" },
+                  ]
+                },
+                {
                   required: ["BATTLED_ELORA"],
                   events: [
                     { type: "textMessage", text: "You're stronger than you look! I will heal up Lucky for you.", faceHero: "npcA" },
                     { type: "healHorsesHp" },
+                    { type: "addStoryFlag", flag: "HEALED_ELORA" },
                   ]
                 },
                 {
@@ -322,32 +330,294 @@ window.OverworldMaps = {
           [utils.asGridCoords(17,12)] : true,
           [utils.asGridCoords(18,12)] : true,
           [utils.asGridCoords(19,12)] : true,
-          [utils.asGridCoords(0,7)] : true,
-          [utils.asGridCoords(1,7)] : true,
-          [utils.asGridCoords(2,7)] : true,
-          [utils.asGridCoords(3,7)] : true,
-          [utils.asGridCoords(4,7)] : true,
-          [utils.asGridCoords(5,7)] : true,
-          [utils.asGridCoords(6,7)] : true,
-          [utils.asGridCoords(7,7)] : true,
-          [utils.asGridCoords(8,7)] : true,
-          [utils.asGridCoords(9,7)] : true,
-          [utils.asGridCoords(10,7)] : true,
-          [utils.asGridCoords(11,7)] : true,
-          [utils.asGridCoords(12,7)] : true,
-          [utils.asGridCoords(13,7)] : true,
-          [utils.asGridCoords(14,7)] : true,
-          [utils.asGridCoords(15,7)] : true,
-          [utils.asGridCoords(16,7)] : true,
-          [utils.asGridCoords(17,7)] : true,
-          [utils.asGridCoords(18,7)] : true,
-          [utils.asGridCoords(19,7)] : true,
+          [utils.asGridCoords(0,6)] : true,
+          [utils.asGridCoords(1,6)] : true,
+          [utils.asGridCoords(2,6)] : true,
+          [utils.asGridCoords(3,6)] : true,
+          [utils.asGridCoords(4,6)] : true,
+          [utils.asGridCoords(5,6)] : true,
+          [utils.asGridCoords(6,6)] : true,
+          [utils.asGridCoords(7,6)] : true,
+          [utils.asGridCoords(8,6)] : true,
+          [utils.asGridCoords(9,6)] : true,
+          [utils.asGridCoords(10,6)] : true,
+          [utils.asGridCoords(11,6)] : true,
+          [utils.asGridCoords(12,6)] : true,
+          [utils.asGridCoords(13,6)] : true,
+          [utils.asGridCoords(14,6)] : true,
+          [utils.asGridCoords(15,6)] : true,
+          [utils.asGridCoords(16,6)] : true,
+          [utils.asGridCoords(17,6)] : true,
+          [utils.asGridCoords(18,6)] : true,
+          [utils.asGridCoords(19,6)] : true,
           [utils.asGridCoords(20,8)] : true,
           [utils.asGridCoords(20,9)] : true,
           [utils.asGridCoords(20,11)] : true,
+          [utils.asGridCoords(21,10)] : true,
         },
         cutsceneSpaces: {
-          
+          [utils.asGridCoords(20,10)]: [
+            {
+              //required: ["BATTLED_ELORA"],
+              events: [
+                { 
+                  type: "changeMap", 
+                  map: "RegionOne",
+                  x: utils.withGrid(0),
+                  y: utils.withGrid(10),
+                  direction: "right" 
+                }
+              ]
+            }
+          ]
         }
+    },
+    RegionOne: {
+      id: "RegionOne",
+      lowerSrc: "/images/maps/Region1Lower.png",
+      upperSrc: "/images/maps/Region1Upper.png",
+      configObjects: {
+        hero: {
+          type: "Person",
+          isPlayerControlled: true,
+          x: utils.withGrid(0),
+          y: utils.withGrid(10),
+          src: "/images/characters/people/hero.png",
+        },
+        elf1: {
+          type: "Person",
+          x: utils.withGrid(6),
+          y: utils.withGrid(7),
+          src: "/images/characters/people/elf1.png",
+          behaviorLoop: [
+            { type: "stand", direction: "right", time: 2800 },
+            { type: "stand", direction: "down", time: 2400 },
+            { type: "stand", direction: "up", time: 1300 },
+          ],
+          talking: [
+            {
+              required: ["BATTLED_FINROD"],
+              events: [
+                { type: "textMessage", text: "You have good technique, but you still have a lot to learn.", faceHero: "elf1" },
+                { type: "textMessage", text: "Fear not! There is no shortage of battles to fight in this region!", faceHero: "elf1" },
+              ]
+            },
+            {
+              required: ["USED_HORSE_SPAWNER_R1"],
+              events: [
+                { type: "textMessage", text: "I see...you were able to open the magical egg...interesting.", faceHero: "elf1" },
+                { type: "textMessage", text: "Why don't we put that new horse of yours to the test?!", faceHero: "elf1" },
+                { type: "battle", enemyId: "finrod" },
+                { type: "addStoryFlag", flag: "BATTLED_FINROD" },
+              ]
+            },
+            {
+              events: [
+                { type: "textMessage", text: "Hello, traveler. Have you come to try and open the magical egg? Nobody has had any luck yet.", faceHero:"elf1" },
+              ]
+            }
+          ]
+        },
+        horseSpawner: {
+          type: "HorseSpawner",
+          x: utils.withGrid(7),
+          y: utils.withGrid(7),
+          storyFlag: "USED_HORSE_SPAWNER_R1",
+          horses: ["n006", "n003"]
+       }
+    },
+    walls: {
+      [utils.asGridCoords(-1,0)] : true,
+      [utils.asGridCoords(-1,1)] : true,
+      [utils.asGridCoords(-1,2)] : true,
+      [utils.asGridCoords(-1,3)] : true,
+      [utils.asGridCoords(-1,4)] : true,
+      [utils.asGridCoords(-1,5)] : true,
+      [utils.asGridCoords(-1,6)] : true,
+      [utils.asGridCoords(-1,7)] : true,
+      [utils.asGridCoords(-1,8)] : true,
+      [utils.asGridCoords(-1,9)] : true,
+      [utils.asGridCoords(-1,10)] : true,
+      [utils.asGridCoords(-1,11)] : true,
+      [utils.asGridCoords(-1,12)] : true,
+      [utils.asGridCoords(2,9)] : true,
+      [utils.asGridCoords(3,4)] : true,
+      [utils.asGridCoords(1,4)] : true,
+      [utils.asGridCoords(2,4)] : true,
+      [utils.asGridCoords(1,5)] : true,
+      [utils.asGridCoords(2,5)] : true,
+      [utils.asGridCoords(0,0)] : true,
+      [utils.asGridCoords(1,0)] : true,
+      [utils.asGridCoords(2,0)] : true,
+      [utils.asGridCoords(0,1)] : true,
+      [utils.asGridCoords(1,1)] : true,
+      [utils.asGridCoords(0,2)] : true,
+      [utils.asGridCoords(1,2)] : true,
+      [utils.asGridCoords(8,0)] : true,
+      [utils.asGridCoords(8,1)] : true,
+      [utils.asGridCoords(8,2)] : true,
+      [utils.asGridCoords(8,3)] : true,
+      [utils.asGridCoords(8,4)] : true,
+      [utils.asGridCoords(8,5)] : true,
+      [utils.asGridCoords(8,6)] : true,
+      [utils.asGridCoords(8,7)] : true,
+      [utils.asGridCoords(8,8)] : true,
+      [utils.asGridCoords(8,9)] : true,
+      [utils.asGridCoords(8,10)] : true,
+      [utils.asGridCoords(8,11)] : true,
+      [utils.asGridCoords(7,-1)] : true,
+      [utils.asGridCoords(6,-1)] : true,
+      [utils.asGridCoords(5,-1)] : true,
+      [utils.asGridCoords(3,-1)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(1,12)] : true,
+      [utils.asGridCoords(2,12)] : true,
+      [utils.asGridCoords(3,12)] : true,
+      [utils.asGridCoords(4,12)] : true,
+      [utils.asGridCoords(5,12)] : true,
+      [utils.asGridCoords(6,12)] : true,
+      [utils.asGridCoords(7,12)] : true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(0,10)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "StartingMap",
+              x: utils.withGrid(20),
+              y: utils.withGrid(10),
+              direction: "left" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(7,10)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionTwo",
+              x: utils.withGrid(0),
+              y: utils.withGrid(14),
+              direction: "right" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(4,0)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionThree",
+              x: utils.withGrid(10),
+              y: utils.withGrid(19),
+              direction: "up" 
+            }
+          ]
+        }
+      ]
     }
+  },
+  RegionTwo: {
+    id: "RegionTwo",
+    lowerSrc: "/images/maps/Region2Lower.png",
+    upperSrc: "/images/maps/Region2Upper.png",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(1),
+        y: utils.withGrid(14),
+        src: "/images/characters/people/hero.png",
+      },
+      nurse1: {
+        type: "Person",
+        x: utils.withGrid(18),
+        y: utils.withGrid(15),
+        src: "/images/characters/people/nurse1.png",
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "Hello traveler. Equine nurse Jake at your service. I will heal your horses right up.", faceHero: "nurse1"},
+              { type: "healHorsesHp" },
+              { type: "textMessage", text: "Come back anytime!"}
+            ]
+          }
+        ]
+      },
+      trainer1: {
+        type: "Person",
+        x: utils.withGrid(9),
+        y: utils.withGrid(11),
+        src: "/images/characters/people/trainer1.png",
+        behaviorLoop: [
+            { type: "walk", direction: "down", time: 2800 },
+            { type: "stand", direction: "down", time: 2400 },
+            { type: "walk", direction: "right", time: 2800 },
+            { type: "stand", direction: "right", time: 2400 },
+            { type: "walk", direction: "up", time: 1300 },
+            { type: "stand", direction: "up", time: 1300 },
+            { type: "walk", direction: "left", time: 1300 },
+            { type: "stand", direction: "left", time: 1300 },
+        ],
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "Prepare yourself for a lesson in style and skill. My horse is the epitome of greatness. You'll be eating my dust!", faceHero: "trainer1" },
+              { type: "battle", enemyId: "robert" }
+            ]
+          },
+        ]
+      }
+    },
+    walls: {
+
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(0,14)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionOne",
+              x: utils.withGrid(7),
+              y: utils.withGrid(10),
+              direction: "left" 
+            }
+          ]
+        }
+      ]
+    }
+  },
+  RegionThree: {
+    id: "RegionThree",
+    lowerSrc: "/images/maps/Region3Lower.png",
+    upperSrc: "/images/maps/Region3Upper.png",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(1),
+        y: utils.withGrid(14),
+        src: "/images/characters/people/hero.png",
+      },
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(10,19)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionOne",
+              x: utils.withGrid(4),
+              y: utils.withGrid(0),
+              direction: "down" 
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

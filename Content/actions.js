@@ -9,6 +9,15 @@ window.Actions = {
         { type: "stateChange", damage: 10}
       ]
     },
+    damage2: {
+      name: "Strike",
+      description: "Strike your enemy with both back hooves!",
+      success: [
+        { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
+        { type: "animation", animation: "spin"},
+        { type: "stateChange", damage: 15}
+      ]
+    },
     nuzzlingBondStatus: {
       name: "Nuzzle",
       description: "Nuzzle up to regain some HP!",

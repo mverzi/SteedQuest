@@ -27,4 +27,16 @@ window.Enemies = {
          }
         } 
      },
+     "finrod": {
+        name: "Finrod",
+        src: "/images/characters/people/elf1.png",
+        horses: {
+            "a": {
+                hp: 55,
+                horseId: "n002",
+                maxHp: 50,
+                level: 1
+            }
+        }
+     }
 }

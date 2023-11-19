@@ -97,7 +97,7 @@ class Combatant {
     getPostEvents(){
         if(this.status?.type === "nuzzling bond"){
             return [
-                { type: "textMessage", text: "Your horse nuzzles up to you!" },
+                //{ type: "textMessage", text: "Your horse nuzzles up to you!" },
                 { type: "stateChange", recover:  5, onCaster: true }
             ]
         }
