@@ -1,20 +1,22 @@
 window.Enemies = {
+    //Region 2
     "robert": {
        name: "Robert",
        src: "/images/characters/people/trainer1.png",
        horses: {
         "a": {
-            horseId: "n002",
+            horseId: "n004",
             maxHp: 50,
             level: 1
         },
         "b": {
-            horseId: "n004",
+            horseId: "n009",
             maxHp: 50,
             level: 1
         },
        } 
     },
+    //Starting Map
     "elora": {
         name: "Elora",
         src: "/images/characters/people/npc1.png",
@@ -27,6 +29,7 @@ window.Enemies = {
          }
         } 
      },
+     //Region 1
      "finrod": {
         name: "Finrod",
         src: "/images/characters/people/elf1.png",

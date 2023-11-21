@@ -60,6 +60,9 @@ class OverworldMap {
         if(object.type === "HorseSpawner"){
           instance = new HorseSpawner(object);
         }
+        if(object.type === "Apple"){
+          instance = new Apple(object);
+        }
         this.gameObjects[key] = instance;
         this.gameObjects[key].id = key;
         instance.mount(this);
@@ -424,7 +427,13 @@ window.OverworldMaps = {
           y: utils.withGrid(7),
           storyFlag: "USED_HORSE_SPAWNER_R1",
           horses: ["n006", "n003"]
-       }
+       },
+       apple: {
+        type: "Apple",
+        id: "apple1",
+        x: utils.withGrid(2),
+        y: utils.withGrid(1),
+      },
     },
     walls: {
       [utils.asGridCoords(-1,0)] : true,
@@ -440,18 +449,20 @@ window.OverworldMaps = {
       [utils.asGridCoords(-1,10)] : true,
       [utils.asGridCoords(-1,11)] : true,
       [utils.asGridCoords(-1,12)] : true,
-      [utils.asGridCoords(2,9)] : true,
-      [utils.asGridCoords(3,4)] : true,
       [utils.asGridCoords(1,4)] : true,
-      [utils.asGridCoords(2,4)] : true,
       [utils.asGridCoords(1,5)] : true,
-      [utils.asGridCoords(2,5)] : true,
       [utils.asGridCoords(0,0)] : true,
       [utils.asGridCoords(1,0)] : true,
       [utils.asGridCoords(2,0)] : true,
       [utils.asGridCoords(0,1)] : true,
       [utils.asGridCoords(1,1)] : true,
       [utils.asGridCoords(0,2)] : true,
+      [utils.asGridCoords(1,2)] : true,
+      [utils.asGridCoords(1,3)] : true,
+      [utils.asGridCoords(1,4)] : true,
+      [utils.asGridCoords(1,5)] : true,
+      [utils.asGridCoords(1,6)] : true,
+      [utils.asGridCoords(1,8)] : true,
       [utils.asGridCoords(1,2)] : true,
       [utils.asGridCoords(8,0)] : true,
       [utils.asGridCoords(8,1)] : true,
@@ -564,16 +575,77 @@ window.OverworldMaps = {
         ],
         talking: [
           {
+            required: ["BATTLED_ROBERT"],
             events: [
-              { type: "textMessage", text: "Prepare yourself for a lesson in style and skill. My horse is the epitome of greatness. You'll be eating my dust!", faceHero: "trainer1" },
-              { type: "battle", enemyId: "robert" }
+              { type: "textMessage", text: "Well, that was quite a battle. I have to admit, you and your horse put up a decent fight." }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Prepare yourself for a lesson in style and skill. My horses are the epitome of greatness. You'll be eating my dust!", faceHero: "trainer1" },
+              { type: "battle", enemyId: "robert" },
+              { type: "addStoryFlag", flag: "BATTLED_ROBERT" },
             ]
           },
         ]
       }
     },
     walls: {
-
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      [utils.asGridCoords(0,16)] : true,
+      [utils.asGridCoords(0,17)] : true,
+      [utils.asGridCoords(0,18)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,16)] : true,
+      [utils.asGridCoords(3,16)] : true,
+      [utils.asGridCoords(4,16)] : true,
+      [utils.asGridCoords(5,16)] : true,
+      [utils.asGridCoords(6,16)] : true,
+      [utils.asGridCoords(7,16)] : true,
+      [utils.asGridCoords(8,16)] : true,
+      [utils.asGridCoords(9,16)] : true,
+      [utils.asGridCoords(10,16)] : true,
+      [utils.asGridCoords(11,16)] : true,
+      [utils.asGridCoords(11,17)] : true,
+      [utils.asGridCoords(13,17)] : true,
+      [utils.asGridCoords(12,18)] : true,
+      [utils.asGridCoords(13,16)] : true,
+      [utils.asGridCoords(14,16)] : true,
+      [utils.asGridCoords(15,16)] : true,
+      [utils.asGridCoords(16,16)] : true,
+      [utils.asGridCoords(17,16)] : true,
+      [utils.asGridCoords(18,16)] : true,
+      [utils.asGridCoords(19,11)] : true,
+      [utils.asGridCoords(19,12)] : true,
+      [utils.asGridCoords(19,13)] : true,
+      [utils.asGridCoords(19,14)] : true,
+      [utils.asGridCoords(19,15)] : true,
+      [utils.asGridCoords(18,10)] : true,
+      [utils.asGridCoords(17,10)] : true,
+      [utils.asGridCoords(16,9)] : true,
+      [utils.asGridCoords(7,9)] : true,
+      [utils.asGridCoords(4,12)] : true,
+      [utils.asGridCoords(1,10)] : true,
+      [utils.asGridCoords(2,10)] : true,
+      [utils.asGridCoords(3,10)] : true,
+      [utils.asGridCoords(4,10)] : true,
+      [utils.asGridCoords(5,10)] : true,
+      [utils.asGridCoords(6,10)] : true,
+      [utils.asGridCoords(7,10)] : true,
+      [utils.asGridCoords(8,8)] : true,
+      [utils.asGridCoords(9,8)] : true,
+      [utils.asGridCoords(10,8)] : true,
+      [utils.asGridCoords(11,8)] : true,
+      [utils.asGridCoords(12,8)] : true,
+      [utils.asGridCoords(13,8)] : true,
+      [utils.asGridCoords(15,8)] : true,
+      [utils.asGridCoords(14,7)] : true,
     },
     cutsceneSpaces: {
       [utils.asGridCoords(0,14)]: [

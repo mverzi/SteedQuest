@@ -128,6 +128,39 @@ class OverworldEvent {
       window.playerState.healHorsesHp(); 
       resolve();
   }
+
+  addItemToInventory(resolve) {
+    const itemToAdd = this.event.item;
+
+    // Assuming you have a playerState object with an inventory array
+    window.playerState.items.push({
+      actionId: itemToAdd.actionId,
+      instanceId: itemToAdd.instanceId,
+    });
+
+    resolve();
+  }
+
+  destroyGameObject(resolve) {
+    console.log("Destroy game object called")
+    const objectId = this.event.objectId;
+    console.log("Item to remove ID: " + objectId)
+    const objectToRemove = this.map.gameObjects[objectId];
+    console.log("Item to remove: " + objectToRemove)
+
+    if (objectToRemove) {
+      // Remove the object from the game world
+      delete this.map.gameObjects[objectId];
+
+      // Optionally, you may want to remove any associated DOM elements or perform cleanup
+      // For example, if the object has a sprite, you can remove its DOM element
+      if (objectToRemove.sprite && objectToRemove.sprite.element) {
+        objectToRemove.sprite.element.remove();
+      }
+    }
+
+    resolve();
+  }
   
     init() {
       return new Promise(resolve => {
