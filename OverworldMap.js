@@ -646,6 +646,7 @@ window.OverworldMaps = {
       [utils.asGridCoords(13,8)] : true,
       [utils.asGridCoords(15,8)] : true,
       [utils.asGridCoords(14,7)] : true,
+      [utils.asGridCoords(-1,14)] : true,
     },
     cutsceneSpaces: {
       [utils.asGridCoords(0,14)]: [
@@ -657,6 +658,19 @@ window.OverworldMaps = {
               x: utils.withGrid(7),
               y: utils.withGrid(10),
               direction: "left" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(14,8)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionFour",
+              x: utils.withGrid(10),
+              y: utils.withGrid(15),
+              direction: "up" 
             }
           ]
         }
@@ -675,6 +689,75 @@ window.OverworldMaps = {
         y: utils.withGrid(14),
         src: "/images/characters/people/hero.png",
       },
+      farmer1 : {
+        type: "Person",
+        x: utils.withGrid(7),
+        y: utils.withGrid(2),
+        src: "/images/characters/people/farmer1.png",
+        behaviorLoop: [
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "stand", direction: "right", time: 3000 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "walk", direction: "left", time: 2800 },
+          { type: "stand", direction: "left", time: 3000 },
+        ],
+        talking: [
+          {
+            required: ["TALKED_FARMER1"],
+            events: [
+              { type: "textMessage", text: "Keep an eye out for more apples! They come in handy during battles.", faceHero: "farmer1" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Howdy, traveler. Did you know you can find apples and carrots in these parts?", faceHero: "farmer1" },
+              { type: "textMessage", text: "They won't do much for you, but your horse will love them.", faceHero: "farmer1"},
+              { type: "textMessage", text: "Here's an apple for the road.", faceHero: "farmer1"},
+              { type: "addItemToInventory", item: { actionId: "item_recoverHp", instanceId: "appleItem" } },
+              { type: "addStoryFlag", flag: "TALKED_FARMER1" },
+
+            ]
+          }
+        ]
+      },
+      trainer3: {
+        type: "Person",
+        x: utils.withGrid(4),
+        y: utils.withGrid(11),
+        src: "/images/characters/people/trainer3.png",
+        behaviorLoop: [
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "stand", direction: "down", time: 2800 },
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "stand", direction: "up", time: 2800 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_SELENE"],
+            events: [
+              { type: "textMessage", text: "You have some strong horses. See you around sometime, maybe for a rematch!", faceHero: "trainer3" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "I've been waiting for someone to battle!", faceHero: "trainer3"},
+              { type: "battle", enemyId: "selene" },
+              { type: "addStoryFlag", flag: "BATTLED_SELENE" },
+            ]
+          }
+        ]
+      }
     },
     cutsceneSpaces: {
       [utils.asGridCoords(10,19)]: [
@@ -689,7 +772,176 @@ window.OverworldMaps = {
             }
           ]
         }
+      ],
+      [utils.asGridCoords(19,9)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionFour",
+              x: utils.withGrid(0),
+              y: utils.withGrid(9),
+              direction: "right" 
+            }
+          ]
+        }
       ]
+    },
+    walls: {
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      [utils.asGridCoords(1,4)] : true,
+      [utils.asGridCoords(2,5)] : true,
+      [utils.asGridCoords(3,5)] : true,
+      [utils.asGridCoords(4,4)] : true,
+      [utils.asGridCoords(5,4)] : true,
+      [utils.asGridCoords(5,3)] : true,
+      [utils.asGridCoords(5,2)] : true,
+      [utils.asGridCoords(5,1)] : true,
+      [utils.asGridCoords(6,0)] : true,
+      [utils.asGridCoords(7,0)] : true,
+      [utils.asGridCoords(8,0)] : true,
+      [utils.asGridCoords(9,0)] : true,
+      [utils.asGridCoords(10,0)] : true,
+      [utils.asGridCoords(11,0)] : true,
+      [utils.asGridCoords(12,0)] : true,
+      [utils.asGridCoords(13,0)] : true,
+      [utils.asGridCoords(14,0)] : true,
+      [utils.asGridCoords(15,1)] : true,
+      [utils.asGridCoords(15,2)] : true,
+      [utils.asGridCoords(15,3)] : true,
+      [utils.asGridCoords(16,4)] : true,
+      [utils.asGridCoords(17,4)] : true,
+      [utils.asGridCoords(18,4)] : true,
+      [utils.asGridCoords(19,5)] : true,
+      [utils.asGridCoords(19,6)] : true,
+      [utils.asGridCoords(19,7)] : true,
+      [utils.asGridCoords(19,8)] : true,
+      [utils.asGridCoords(19,10)] : true,
+      [utils.asGridCoords(19,11)] : true,
+      [utils.asGridCoords(19,12)] : true,
+      [utils.asGridCoords(19,13)] : true,
+      [utils.asGridCoords(19,14)] : true,
+      [utils.asGridCoords(19,15)] : true,
+      [utils.asGridCoords(20,9)] : true,
+      [utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,16)] : true,
+      [utils.asGridCoords(3,16)] : true,
+      [utils.asGridCoords(4,16)] : true,
+      [utils.asGridCoords(4,17)] : true,
+      [utils.asGridCoords(4,18)] : true,
+      [utils.asGridCoords(5,19)] : true,
+      [utils.asGridCoords(6,19)] : true,
+      [utils.asGridCoords(7,19)] : true,
+      [utils.asGridCoords(8,19)] : true,
+      [utils.asGridCoords(9,19)] : true,
+      [utils.asGridCoords(11,19)] : true,
+      [utils.asGridCoords(12,19)] : true,
+      [utils.asGridCoords(13,19)] : true,
+      [utils.asGridCoords(14,19)] : true,
+      [utils.asGridCoords(15,19)] : true,
+      [utils.asGridCoords(16,19)] : true,
+      [utils.asGridCoords(10,20)] : true,
+    }
+  },
+  
+  RegionFour: {
+    id: "RegionFour",
+    lowerSrc: "/images/maps/Region4Lower.png",
+    upperSrc: "/images/maps/Region4Upper.png",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(2),
+        y: utils.withGrid(12),
+        src: "/images/characters/people/hero.png",
+      },
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(0,9)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionThree",
+              x: utils.withGrid(19),
+              y: utils.withGrid(9),
+              direction: "left" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(10,15)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "RegionTwo",
+              x: utils.withGrid(14),
+              y: utils.withGrid(8),
+              direction: "down" 
+            }
+          ]
+        }
+      ]
+    },
+    walls: {
+      [utils.asGridCoords(1,15)] : true,
+      [utils.asGridCoords(2,15)] : true,
+      [utils.asGridCoords(3,15)] : true,
+      [utils.asGridCoords(4,15)] : true,
+      [utils.asGridCoords(5,15)] : true,
+      [utils.asGridCoords(6,15)] : true,
+      [utils.asGridCoords(7,15)] : true,
+      [utils.asGridCoords(8,15)] : true,
+      [utils.asGridCoords(9,15)] : true,
+      [utils.asGridCoords(10,16)] : true,
+      [utils.asGridCoords(11,15)] : true,
+      [utils.asGridCoords(12,15)] : true,
+      [utils.asGridCoords(13,15)] : true,
+      [utils.asGridCoords(14,15)] : true,
+      [utils.asGridCoords(15,6)] : true,
+      [utils.asGridCoords(15,7)] : true,
+      [utils.asGridCoords(15,8)] : true,
+      [utils.asGridCoords(15,9)] : true,
+      [utils.asGridCoords(15,10)] : true,
+      [utils.asGridCoords(15,11)] : true,
+      [utils.asGridCoords(15,12)] : true,
+      [utils.asGridCoords(15,13)] : true,
+      [utils.asGridCoords(15,14)] : true,
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(-1,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(1,5)] : true,
+      [utils.asGridCoords(2,5)] : true,
+      [utils.asGridCoords(3,5)] : true,
+      [utils.asGridCoords(5,5)] : true,
+      [utils.asGridCoords(6,5)] : true,
+      [utils.asGridCoords(7,5)] : true,
+      [utils.asGridCoords(8,5)] : true,
+      [utils.asGridCoords(9,5)] : true,
+      [utils.asGridCoords(10,5)] : true,
+      [utils.asGridCoords(11,5)] : true,
+      [utils.asGridCoords(12,5)] : true,
+      [utils.asGridCoords(13,5)] : true,
+      [utils.asGridCoords(14,5)] : true,
     }
   }
 }

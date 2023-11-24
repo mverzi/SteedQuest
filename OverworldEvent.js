@@ -132,7 +132,6 @@ class OverworldEvent {
   addItemToInventory(resolve) {
     const itemToAdd = this.event.item;
 
-    // Assuming you have a playerState object with an inventory array
     window.playerState.items.push({
       actionId: itemToAdd.actionId,
       instanceId: itemToAdd.instanceId,
@@ -149,11 +148,7 @@ class OverworldEvent {
     console.log("Item to remove: " + objectToRemove)
 
     if (objectToRemove) {
-      // Remove the object from the game world
       delete this.map.gameObjects[objectId];
-
-      // Optionally, you may want to remove any associated DOM elements or perform cleanup
-      // For example, if the object has a sprite, you can remove its DOM element
       if (objectToRemove.sprite && objectToRemove.sprite.element) {
         objectToRemove.sprite.element.remove();
       }
@@ -161,6 +156,7 @@ class OverworldEvent {
 
     resolve();
   }
+
   
     init() {
       return new Promise(resolve => {

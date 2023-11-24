@@ -1,21 +1,4 @@
 window.Enemies = {
-    //Region 2
-    "robert": {
-       name: "Robert",
-       src: "/images/characters/people/trainer1.png",
-       horses: {
-        "a": {
-            horseId: "n004",
-            maxHp: 50,
-            level: 1
-        },
-        "b": {
-            horseId: "n009",
-            maxHp: 50,
-            level: 1
-        },
-       } 
-    },
     //Starting Map
     "elora": {
         name: "Elora",
@@ -41,5 +24,35 @@ window.Enemies = {
                 level: 1
             }
         }
+     },
+     //Region 2
+    "robert": {
+        name: "Robert",
+        src: "/images/characters/people/trainer1.png",
+        horses: {
+         "a": {
+             horseId: "n004",
+             maxHp: 50,
+             level: 1
+         },
+         "b": {
+             horseId: "n009",
+             maxHp: 50,
+             level: 1
+         },
+        } 
+     },
+     //Region 3
+     "selene": {
+        name: "Selene",
+        src: "/images/characters/people/trainer3.png",
+        horses: {
+            "a": {
+                horseId: "n010",
+                maxHp: 65,
+                level: 1
+            }
+        }
      }
+     
 }

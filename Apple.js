@@ -20,6 +20,6 @@ class Apple extends GameObject {
     }
 
     update() {
-        // You can add any update logic specific to apples here
+
     }
 }

@@ -19,7 +19,6 @@ class PlayerState {
         this.storyFlags = {
             
         }
-        console.log(this.storyFlags);
     }
 
     addHorse(horseId) {
