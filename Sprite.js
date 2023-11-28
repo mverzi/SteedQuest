@@ -81,8 +81,8 @@ class Sprite {
       let [frameX, frameY] = this.frame;
 
       if (this.gameObject instanceof Apple) {
-        x += 8;
-        y += 16; 
+        x += 0;
+        y += 4; 
       }
   
       this.isLoaded && ctx.drawImage(this.image,

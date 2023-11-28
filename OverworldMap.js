@@ -292,6 +292,7 @@ window.OverworldMaps = {
         id: "apple1",
         x: utils.withGrid(2),
         y: utils.withGrid(1),
+        storyFlag: "COLLECTED_APPLE1"
       },
     },
     walls: {
