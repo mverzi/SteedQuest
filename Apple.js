@@ -3,7 +3,7 @@ class Apple extends GameObject {
         super(config);
         this.sprite = new Sprite({
             gameObject: this,
-            src: "/images/items/apple.png", // Set the path to your apple image
+            src: "/images/items/apple.png"
         });
 
         this.id = config.id;

@@ -115,147 +115,6 @@ class OverworldMap {
   }
 
 window.OverworldMaps = {
-    DemoRoom: {
-        id: "DemoRoom",
-        lowerSrc: "/images/backgrounds/DemoLower.png",
-        upperSrc: "/images/backgrounds/DemoUpper.png",
-        configObjects: {
-            hero: {
-                type: "Person",
-                isPlayerControlled: true,
-                x: utils.withGrid(5),
-                y: utils.withGrid(6),
-            },
-            npcA: {
-                type: "Person",
-                x: utils.withGrid(6),
-                y: utils.withGrid(9),
-                src: "/images/characters/people/npc1.png",
-                behaviorLoop: [
-                    { type: "stand", direction: "left", time: 1800},
-                    { type: "stand", direction: "up", time: 1800 },
-                    { type: "stand", direction: "right", time: 1400 },
-                    { type: "stand", direction: "up", time: 1300 },
-                ],
-                talking: [
-                  {
-                    required: ["TALKED_TO_ROBERT"],
-                    events: [
-                      { type: "textMessage", text: "Isn't Robert over there kind of annoying?", faceHero: "npcA" },
-                    ]
-                  },
-                  {
-                    events: [
-                      { type: "textMessage", text: "Oh, you want to battle, don't you?", faceHero: "npcA" },
-                      { type: "battle", enemyId: "ellie" },
-                      { type: "addStoryFlag", flag: "DEFEATED_ELLIE" },
-                      { type: "textMessage", text: "Oh man, you're stronger than you look.", faceHero: "npcA" },
-                      //{ who: "hero", type: "walk", direction: "up" }
-                    ]
-                  }
-                ]
-            },
-            npcB: {
-                type: "Person",
-                x:utils.withGrid(8),
-                y: utils.withGrid(5),
-                src: "/images/characters/people/trainer1.png",
-                talking: [
-                  {
-                    events: [
-                      { type: "textMessage", text: "Bahahaha!", faceHero: "npcB" },
-                      { type: "addStoryFlag", flag: "TALKED_TO_ROBERT" }
-                      //{ type: "battle", enemyId: "robert" }
-                    ]
-                  }
-                ],
-                // behaviorLoop: [
-                //     { type: "walk", direction: "left" },
-                //     { type: "stand", direction: "up", time: 800 },
-                //     { type: "walk", direction: "up" },
-                //     { type: "walk", direction: "right" },
-                //     { type: "walk", direction: "down" }
-                // ]
-            },
-              horseSpawner: {
-                type: "HorseSpawner",
-                x: utils.withGrid(2),
-                y: utils.withGrid(7),
-                storyFlag: "USED_HORSE_SPAWNER",
-                horses: ["n006", "n003"]
-              }
-        },
-        walls: {
-            [utils.asGridCoords(7,6)] : true,
-            [utils.asGridCoords(8,6)] : true,
-            [utils.asGridCoords(7,7)] : true,
-            [utils.asGridCoords(8,7)] : true,
-            [utils.asGridCoords(9,3)] : true,
-            [utils.asGridCoords(10,3)] : true,
-            [utils.asGridCoords(3,3)] : true,
-            [utils.asGridCoords(4,3)] : true,
-            [utils.asGridCoords(1,3)] : true,
-            [utils.asGridCoords(2,3)] : true,
-            [utils.asGridCoords(5,3)] : true,
-            [utils.asGridCoords(6,4)] : true,
-            [utils.asGridCoords(8,4)] : true,
-        },
-        cutsceneSpaces: {
-          [utils.asGridCoords(7,4)]: [
-            {
-              events: [
-                { who: "npcB", type: "walk", direction: "left" },
-                { who: "npcB", type: "stand", direction: "up", time: 500 },
-                { type: "textMessage", text: "You can't go in there!"},
-                { who: "npcB", type: "walk", direction: "right" },
-                { who: "npcB", type: "stand", direction: "down" },
-                { who: "hero", type: "walk", direction: "down" },
-                { who: "hero", type: "walk", direction: "left" },
-              ]
-            }
-          ],
-          [utils.asGridCoords(5,10)]: [
-            {
-              events: [
-                { 
-                  type: "changeMap", 
-                  map: "Street",
-                  x: utils.withGrid(29),
-                  y: utils.withGrid(9),
-                  direction: "down" 
-                }
-              ]
-            }
-          ]
-        }
-    }, 
-    ForestRoom: {
-        id: "ForestRoom",
-        lowerSrc: "/images/backgrounds/ForestLower.png",
-        upperSrc: "images/backgrounds/ForestUpper.png",
-        configObjects: {
-            hero: {
-              type: "Person",
-              isPlayerControlled: true,
-              x: utils.withGrid(7),
-              y: utils.withGrid(6),
-              src: "/images/characters/people/hero.png"
-            },
-            npcA: {
-              type: "Person",
-              x: utils.withGrid(10),
-              y: utils.withGrid(8),
-              src: "/images/characters/people/npc4.png",
-              talking: [
-                {
-                  events: [
-                    { type: "textMessage", text: "You made it!", faceHero:"npcA" }
-                  ]
-                }
-              ]
-            }
-        }
-    },
     StartingMap: {
       id: "StartingMap",
         lowerSrc: "/images/maps/StreetLower.png",
@@ -547,11 +406,11 @@ window.OverworldMaps = {
         type: "Person",
         x: utils.withGrid(18),
         y: utils.withGrid(15),
-        src: "/images/characters/people/nurse1.png",
+        src: "/images/characters/people/nurse.png",
         talking: [
           {
             events: [
-              { type: "textMessage", text: "Hello traveler. Equine nurse Jake at your service. I will heal your horses right up.", faceHero: "nurse1"},
+              { type: "textMessage", text: "Hello traveler. Equine nurse Lara at your service. I will heal your horses right up.", faceHero: "nurse1"},
               { type: "healHorsesHp" },
               { type: "textMessage", text: "Come back anytime!"}
             ]
@@ -893,6 +752,19 @@ window.OverworldMaps = {
             }
           ]
         }
+      ],
+      [utils.asGridCoords(15,9)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion1",
+              x: utils.withGrid(0),
+              y: utils.withGrid(15),
+              direction: "right" 
+            }
+          ]
+        }
       ]
     },
     walls: {
@@ -913,7 +785,7 @@ window.OverworldMaps = {
       [utils.asGridCoords(15,6)] : true,
       [utils.asGridCoords(15,7)] : true,
       [utils.asGridCoords(15,8)] : true,
-      [utils.asGridCoords(15,9)] : true,
+      [utils.asGridCoords(16,9)] : true,
       [utils.asGridCoords(15,10)] : true,
       [utils.asGridCoords(15,11)] : true,
       [utils.asGridCoords(15,12)] : true,
@@ -943,5 +815,696 @@ window.OverworldMaps = {
       [utils.asGridCoords(13,5)] : true,
       [utils.asGridCoords(14,5)] : true,
     }
-  }
+  },
+  MainRegion1: {
+    id: "MainRegion1",
+    lowerSrc: "/images/maps/MainRegion1Lower.png",
+    upperSrc: "/images/maps/MainRegion1Upper.png",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(7),
+        y: utils.withGrid(6),
+        src: "/images/characters/people/hero.png"
+      },
+      npcA: {
+        type: "Person",
+        x: utils.withGrid(13),
+        y: utils.withGrid(8),
+        src: "/images/characters/people/guy5.png",
+        behaviorLoop: [
+          { type: "stand", direction: "left", time: 1800},
+          { type: "stand", direction: "down", time: 1800 },
+          { type: "stand", direction: "right", time: 1400 },
+          { type: "stand", direction: "down", time: 1300 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_DEREK"],
+            events: [
+              { type: "textMessage", text: "I wasn't expected that result, to be honest with you!", faceHero: "npcA" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "You need a strong fishing pole to catch trout!", faceHero:"npcA" },
+              { type: "textMessage", text: "And an even stronger horse to beat me!", faceHero:"npcA" },
+              { type: "battle", enemyId: "derek" },
+              { type: "addStoryFlag", flag: "BATTLED_DEREK" },
+            ]
+          }
+        ]
+      },
+      npcB: {
+        type: "Person",
+        x: utils.withGrid(9),
+        y: utils.withGrid(12),
+        src: "/images/characters/people/guy3.png",
+        behaviorLoop: [
+          { type: "stand", direction: "left", time: 1200},
+          { type: "stand", direction: "down", time: 1200 },
+          { type: "stand", direction: "right", time: 900 },
+          { type: "stand", direction: "down", time: 1100 },
+        ],
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "I heard that there are unicorns in the hidden forest!", faceHero:"npcB" }
+            ]
+          }
+        ]
+      }
+  },
+  cutsceneSpaces: {
+    [utils.asGridCoords(0,15)]: [
+      {
+        events: [
+          { 
+            type: "changeMap", 
+            map: "RegionFour",
+            x: utils.withGrid(15),
+            y: utils.withGrid(9),
+            direction: "left" 
+          }
+        ]
+      }
+    ],
+    [utils.asGridCoords(19,15)]: [
+      {
+        events: [
+          { 
+            type: "changeMap", 
+            map: "MainRegion2",
+            x: utils.withGrid(0),
+            y: utils.withGrid(16),
+            direction: "right" 
+          }
+        ]
+      }
+    ]
+  },
+  walls: {
+
+    // left walls
+    [utils.asGridCoords(0,1)] : true,
+    [utils.asGridCoords(0,2)] : true,
+    [utils.asGridCoords(0,3)] : true,
+    [utils.asGridCoords(0,4)] : true,
+    [utils.asGridCoords(0,5)] : true,
+    [utils.asGridCoords(0,6)] : true,
+    [utils.asGridCoords(0,7)] : true,
+    [utils.asGridCoords(0,8)] : true,
+    [utils.asGridCoords(0,9)] : true,
+    [utils.asGridCoords(0,10)] : true,
+    [utils.asGridCoords(0,11)] : true,
+    [utils.asGridCoords(0,12)] : true,
+    [utils.asGridCoords(0,13)] : true,
+    [utils.asGridCoords(0,14)] : true,
+    // [utils.asGridCoords(0,15)] : true,
+    [utils.asGridCoords(0,16)] : true,
+    [utils.asGridCoords(0,17)] : true,
+    [utils.asGridCoords(0,18)] : true,
+
+    // bottom walls
+    [utils.asGridCoords(1,16)] : true,
+    [utils.asGridCoords(2,16)] : true,
+    [utils.asGridCoords(3,16)] : true,
+    [utils.asGridCoords(4,16)] : true,
+    [utils.asGridCoords(5,16)] : true,
+    [utils.asGridCoords(6,16)] : true,
+    [utils.asGridCoords(7,16)] : true,
+    [utils.asGridCoords(8,16)] : true,
+    [utils.asGridCoords(9,16)] : true,
+    [utils.asGridCoords(10,16)] : true,
+    [utils.asGridCoords(11,16)] : true,
+    [utils.asGridCoords(12,16)] : true,
+    [utils.asGridCoords(13,16)] : true,
+    [utils.asGridCoords(14,16)] : true,
+    [utils.asGridCoords(15,16)] : true,
+    [utils.asGridCoords(16,16)] : true,
+    [utils.asGridCoords(17,16)] : true,
+    [utils.asGridCoords(18,16)] : true,
+    [utils.asGridCoords(19,16)] : true,
+
+    // top walls
+    [utils.asGridCoords(1,1)] : true,
+    [utils.asGridCoords(2,1)] : true,
+    [utils.asGridCoords(3,1)] : true,
+    [utils.asGridCoords(4,1)] : true,
+    [utils.asGridCoords(5,1)] : true,
+    [utils.asGridCoords(6,1)] : true,
+    [utils.asGridCoords(7,1)] : true,
+    [utils.asGridCoords(8,1)] : true,
+    [utils.asGridCoords(9,1)] : true,
+    [utils.asGridCoords(10,0)] : true,
+    [utils.asGridCoords(11,1)] : true,
+    [utils.asGridCoords(12,1)] : true,
+    [utils.asGridCoords(13,1)] : true,
+    [utils.asGridCoords(14,1)] : true,
+    [utils.asGridCoords(15,1)] : true,
+    [utils.asGridCoords(16,1)] : true,
+    [utils.asGridCoords(17,1)] : true,
+    [utils.asGridCoords(18,1)] : true,
+    [utils.asGridCoords(19,1)] : true,
+
+    [utils.asGridCoords(19,0)] : true,
+    [utils.asGridCoords(19,1)] : true,
+    [utils.asGridCoords(19,2)] : true,
+    [utils.asGridCoords(19,3)] : true,
+    [utils.asGridCoords(19,4)] : true,
+    [utils.asGridCoords(19,5)] : true,
+    [utils.asGridCoords(19,6)] : true,
+    [utils.asGridCoords(19,7)] : true,
+    [utils.asGridCoords(19,8)] : true,
+    [utils.asGridCoords(19,9)] : true,
+    [utils.asGridCoords(19,10)] : true,
+    [utils.asGridCoords(19,11)] : true,
+    [utils.asGridCoords(19,12)] : true,
+    [utils.asGridCoords(19,13)] : true,
+    [utils.asGridCoords(19,14)] : true,
+    // [utils.asGridCoords(19,15)] : true,
+    
+
+    // path walls
+    [utils.asGridCoords(8,11)] : true,
+    [utils.asGridCoords(8,10)] : true,
+    [utils.asGridCoords(8,9)] : true,
+    [utils.asGridCoords(8,8)] : true,
+    [utils.asGridCoords(8,7)] : true,
+    [utils.asGridCoords(8,6)] : true,
+    [utils.asGridCoords(8,5)] : true,
+    [utils.asGridCoords(8,4)] : true,
+    [utils.asGridCoords(8,3)] : true,
+    [utils.asGridCoords(8,2)] : true,
+    [utils.asGridCoords(8,1)] : true,
+    
+    // house walls
+    [utils.asGridCoords(7,11)] : true,
+    [utils.asGridCoords(7,12)] : true,
+    [utils.asGridCoords(6,12)] : true,
+    [utils.asGridCoords(5,12)] : true,
+    [utils.asGridCoords(4,12)] : true,
+    [utils.asGridCoords(3,12)] : true,
+    [utils.asGridCoords(2,12)] : true,
+    [utils.asGridCoords(1,12)] : true,
+
+
+    // lake walls
+    [utils.asGridCoords(13,2)] : true,
+    [utils.asGridCoords(13,3)] : true,
+    [utils.asGridCoords(14,4)] : true,
+    [utils.asGridCoords(14,5)] : true,
+    [utils.asGridCoords(14,6)] : true,
+    [utils.asGridCoords(15,7)] : true,
+    [utils.asGridCoords(15,6)] : true,
+    [utils.asGridCoords(16,6)] : true,
+    [utils.asGridCoords(17,6)] : true,
+    [utils.asGridCoords(18,6)] : true,
+    [utils.asGridCoords(19,6)] : true,
+    } 
+  },
+  MainRegion2: {
+    id: "MainRegion2",
+    lowerSrc: "/images/maps/MainRegion2Lower.png",
+    upperSrc: "/images/maps/MainRegion1Upper.png",
+    configObjects: {
+        hero: {
+          type: "Person",
+          isPlayerControlled: true,
+          x: utils.withGrid(7),
+          y: utils.withGrid(6),
+          src: "/images/characters/people/hero.png"
+        },
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(0,16)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion1",
+              x: utils.withGrid(18),
+              y: utils.withGrid(15),
+              direction: "left" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(19,16)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion3",
+              x: utils.withGrid(0),
+              y: utils.withGrid(14),
+              direction: "right" 
+            }
+          ]
+        }
+      ]
+    },
+    
+    walls: {
+      // left walls
+      [utils.asGridCoords(0,1)] : true,
+      [utils.asGridCoords(0,2)] : true,
+      [utils.asGridCoords(0,3)] : true,
+      [utils.asGridCoords(0,4)] : true,
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      // [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      //[utils.asGridCoords(0,16)] : true,
+      [utils.asGridCoords(0,17)] : true,
+      [utils.asGridCoords(0,18)] : true,
+
+      // bottom walls
+      //[utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,18)] : true,
+      [utils.asGridCoords(3,18)] : true,
+      [utils.asGridCoords(4,18)] : true,
+      [utils.asGridCoords(5,18)] : true,
+      [utils.asGridCoords(6,18)] : true,
+      [utils.asGridCoords(7,18)] : true,
+      [utils.asGridCoords(8,18)] : true,
+      [utils.asGridCoords(9,18)] : true,
+      [utils.asGridCoords(11,18)] : true,
+      [utils.asGridCoords(12,18)] : true,
+      [utils.asGridCoords(13,18)] : true,
+      [utils.asGridCoords(14,18)] : true,
+      [utils.asGridCoords(15,18)] : true,
+      [utils.asGridCoords(16,18)] : true,
+      [utils.asGridCoords(17,18)] : true,
+      [utils.asGridCoords(18,18)] : true,
+      [utils.asGridCoords(19,18)] : true,
+
+      // top walls
+      [utils.asGridCoords(1,0)] : true,
+      [utils.asGridCoords(2,0)] : true,
+      [utils.asGridCoords(3,0)] : true,
+      [utils.asGridCoords(4,0)] : true,
+      [utils.asGridCoords(5,0)] : true,
+      [utils.asGridCoords(6,0)] : true,
+      [utils.asGridCoords(7,0)] : true,
+      [utils.asGridCoords(8,0)] : true,
+      [utils.asGridCoords(9,0)] : true,
+      [utils.asGridCoords(10,0)] : true,
+      [utils.asGridCoords(11,0)] : true,
+      [utils.asGridCoords(12,0)] : true,
+      [utils.asGridCoords(13,0)] : true,
+      [utils.asGridCoords(14,0)] : true,
+      [utils.asGridCoords(15,0)] : true,
+      [utils.asGridCoords(16,0)] : true,
+      [utils.asGridCoords(17,0)] : true,
+      [utils.asGridCoords(18,0)] : true,
+
+      // crystal
+      [utils.asGridCoords(17,5)] : true,
+      [utils.asGridCoords(17,4)] : true,
+      [utils.asGridCoords(18,5)] : true,
+      [utils.asGridCoords(18,6)] : true,
+      [utils.asGridCoords(14,10)] : true,
+      [utils.asGridCoords(13,10)] : true,
+
+      // right walls
+      [utils.asGridCoords(19,0)] : true,
+      [utils.asGridCoords(19,1)] : true,
+      [utils.asGridCoords(19,2)] : true,
+      [utils.asGridCoords(19,3)] : true,
+      [utils.asGridCoords(19,4)] : true,
+      [utils.asGridCoords(19,5)] : true,
+      [utils.asGridCoords(19,6)] : true,
+      [utils.asGridCoords(19,7)] : true,
+      [utils.asGridCoords(19,8)] : true,
+      [utils.asGridCoords(19,9)] : true,
+      [utils.asGridCoords(19,10)] : true,
+      [utils.asGridCoords(19,11)] : true,
+      [utils.asGridCoords(19,12)] : true,
+      [utils.asGridCoords(19,13)] : true,
+      // [utils.asGridCoords(19,14)] : true,
+      [utils.asGridCoords(19,15)] : true,
+    }
+  },
+  MainRegion3: {
+    id: "MainRegion3",
+    lowerSrc: "/images/maps/MainRegion3Lower.png",
+    upperSrc: "/images/maps/MainRegion1Upper.png",
+    configObjects: {
+        hero: {
+          type: "Person",
+          isPlayerControlled: true,
+          x: utils.withGrid(7),
+          y: utils.withGrid(6),
+          src: "/images/characters/people/hero.png"
+        },
+        npcA: {
+          type: "Person",
+          x: utils.withGrid(15),
+          y: utils.withGrid(8),
+          src: "/images/characters/people/girl2.png",
+          behaviorLoop: [
+            { type: "stand", direction: "left", time: 1100},
+            { type: "stand", direction: "down", time: 1100 },
+            { type: "stand", direction: "right", time: 1000 },
+            { type: "stand", direction: "down", time: 1100 },
+          ],
+          talking: [
+            {
+              events: [
+                { type: "textMessage", text: "I read that crystals can attract a unicorn!", faceHero:"npcA" },
+                { type: "textMessage", text: "So this is a pretty good place to tame one!", faceHero:"npcA" }
+              ]
+            }
+          ]
+        },
+        npcB: {
+          type: "Person",
+          x: utils.withGrid(5),
+          y: utils.withGrid(10),
+          src: "/images/characters/people/girl4.png",
+          talking: [
+            {
+              events: [
+                { type: "textMessage", text: "This forest has been known to possess magical creatures!", faceHero:"npcB" },
+                { type: "textMessage", text: "Maybe you have a chance of finding one.", faceHero:"npcB" }
+              ]
+            }
+          ]
+        },
+        horseA: {
+          type: "Person",
+          x: utils.withGrid(14),
+          y: utils.withGrid(4),
+          src: "/images/characters/horses/uni1.png",
+          talking: [
+            {
+              events: [
+                { type: "textMessage", text: "Nraaah!", faceHero:"horseA" }
+              ]
+            }
+          ]
+        },
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(0,14)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion2",
+              x: utils.withGrid(19),
+              y: utils.withGrid(16),
+              direction: "left" 
+            }
+          ]
+        }
+      ],
+      [utils.asGridCoords(19,14)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion4",
+              x: utils.withGrid(1),
+              y: utils.withGrid(14),
+              direction: "right" 
+            }
+          ]
+        }
+      ]
+    },
+    
+    walls: {
+      // left walls
+      [utils.asGridCoords(0,1)] : true,
+      [utils.asGridCoords(0,2)] : true,
+      [utils.asGridCoords(0,3)] : true,
+      [utils.asGridCoords(0,4)] : true,
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      // [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      [utils.asGridCoords(0,16)] : true,
+      [utils.asGridCoords(0,17)] : true,
+      [utils.asGridCoords(0,18)] : true,
+
+      // bottom walls
+      [utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,16)] : true,
+      [utils.asGridCoords(3,16)] : true,
+      [utils.asGridCoords(4,16)] : true,
+      [utils.asGridCoords(5,16)] : true,
+      [utils.asGridCoords(6,16)] : true,
+      [utils.asGridCoords(7,16)] : true,
+      [utils.asGridCoords(8,16)] : true,
+      [utils.asGridCoords(9,16)] : true,
+      [utils.asGridCoords(10,16)] : true,
+      [utils.asGridCoords(11,16)] : true,
+      [utils.asGridCoords(12,16)] : true,
+      [utils.asGridCoords(13,16)] : true,
+      [utils.asGridCoords(14,16)] : true,
+      [utils.asGridCoords(15,16)] : true,
+      [utils.asGridCoords(16,16)] : true,
+      [utils.asGridCoords(17,16)] : true,
+      [utils.asGridCoords(18,16)] : true,
+      [utils.asGridCoords(19,16)] : true,
+
+      // top walls
+      [utils.asGridCoords(1,0)] : true,
+      [utils.asGridCoords(2,0)] : true,
+      [utils.asGridCoords(3,0)] : true,
+      [utils.asGridCoords(4,0)] : true,
+      [utils.asGridCoords(5,0)] : true,
+      [utils.asGridCoords(6,0)] : true,
+      [utils.asGridCoords(7,0)] : true,
+      [utils.asGridCoords(8,0)] : true,
+      [utils.asGridCoords(9,0)] : true,
+      [utils.asGridCoords(10,0)] : true,
+      [utils.asGridCoords(11,0)] : true,
+      [utils.asGridCoords(12,0)] : true,
+      [utils.asGridCoords(13,0)] : true,
+      [utils.asGridCoords(14,0)] : true,
+      [utils.asGridCoords(15,0)] : true,
+      [utils.asGridCoords(16,0)] : true,
+      [utils.asGridCoords(17,0)] : true,
+      [utils.asGridCoords(18,0)] : true,
+
+      // crystal
+      [utils.asGridCoords(17,5)] : true,
+      [utils.asGridCoords(17,4)] : true,
+      [utils.asGridCoords(18,5)] : true,
+      [utils.asGridCoords(18,6)] : true,
+      [utils.asGridCoords(14,10)] : true,
+      [utils.asGridCoords(13,10)] : true,
+
+      // right walls
+      [utils.asGridCoords(19,0)] : true,
+      [utils.asGridCoords(19,1)] : true,
+      [utils.asGridCoords(19,2)] : true,
+      [utils.asGridCoords(19,3)] : true,
+      [utils.asGridCoords(19,4)] : true,
+      [utils.asGridCoords(19,5)] : true,
+      [utils.asGridCoords(19,6)] : true,
+      [utils.asGridCoords(19,7)] : true,
+      [utils.asGridCoords(19,8)] : true,
+      [utils.asGridCoords(19,9)] : true,
+      [utils.asGridCoords(19,10)] : true,
+      [utils.asGridCoords(19,11)] : true,
+      [utils.asGridCoords(19,12)] : true,
+      [utils.asGridCoords(19,13)] : true,
+      // [utils.asGridCoords(19,14)] : true,
+      [utils.asGridCoords(19,15)] : true,
+
+      // rock walls
+      [utils.asGridCoords(10,1)] : true,
+      [utils.asGridCoords(10,2)] : true,
+      [utils.asGridCoords(10,3)] : true,
+      [utils.asGridCoords(10,4)] : true,
+      [utils.asGridCoords(10,5)] : true,
+      [utils.asGridCoords(10,6)] : true,
+      [utils.asGridCoords(10,7)] : true,
+      [utils.asGridCoords(10,8)] : true,
+      [utils.asGridCoords(10,9)] : true,
+      [utils.asGridCoords(10,10)] : true,
+      [utils.asGridCoords(10,11)] : true,
+      [utils.asGridCoords(10,12)] : true,
+      [utils.asGridCoords(10,13)] : true,
+      // [utils.asGridCoords(10,14)] : true,
+      [utils.asGridCoords(10,15)] : true,
+      [utils.asGridCoords(10,16)] : true,
+      [utils.asGridCoords(10,17)] : true,
+      [utils.asGridCoords(12,1)] : true,
+      [utils.asGridCoords(12,2)] : true,
+      [utils.asGridCoords(12,3)] : true,
+      [utils.asGridCoords(12,4)] : true,
+      [utils.asGridCoords(12,5)] : true,
+      [utils.asGridCoords(12,6)] : true,
+      [utils.asGridCoords(12,7)] : true,
+      [utils.asGridCoords(12,8)] : true,
+      [utils.asGridCoords(11,9)] : true,
+      [utils.asGridCoords(11,10)] : true,
+      [utils.asGridCoords(11,11)] : true,
+      [utils.asGridCoords(11,12)] : true,
+      [utils.asGridCoords(11,13)] : true,
+      [utils.asGridCoords(11,15)] : true,
+      [utils.asGridCoords(11,16)] : true,
+    },
+  },
+  MainRegion4: {
+    id: "MainRegion4",
+    lowerSrc: "/images/maps/MainRegion4Lower.png",
+    upperSrc: "/images/maps/MainRegion1Upper.png",
+    configObjects: {
+        hero: {
+          type: "Person",
+          isPlayerControlled: true,
+          x: utils.withGrid(7),
+          y: utils.withGrid(6),
+          src: "/images/characters/people/hero.png"
+        },
+        npcA: {
+          type: "Person",
+          x: utils.withGrid(5),
+          y: utils.withGrid(8),
+          src: "/images/characters/people/guy6.png",
+          behaviorLoop: [
+            { type: "walk", direction: "down", time: 1800 },
+            { type: "walk", direction: "down", time: 1800 },
+            { type: "walk", direction: "down", time: 1800 },
+            { type: "stand", direction: "down", time: 1400 },
+            { type: "walk", direction: "right", time: 1800 },
+            { type: "walk", direction: "right", time: 1800 },
+            { type: "walk", direction: "right", time: 1800 },
+            { type: "stand", direction: "right", time: 1400 },
+            { type: "walk", direction: "up", time: 1300 },
+            { type: "walk", direction: "up", time: 1300 },
+            { type: "walk", direction: "up", time: 1300 },
+            { type: "stand", direction: "up", time: 1300 },
+            { type: "walk", direction: "left", time: 1300 },
+            { type: "walk", direction: "left", time: 1300 },
+            { type: "walk", direction: "left", time: 1300 },
+            { type: "stand", direction: "left", time: 1300 },
+        ],
+          talking: [
+            {
+              events: [
+                { type: "textMessage", text: "Man, I saw a pegasus across the river!", faceHero:"npcA" },
+                { type: "textMessage", text: "I need a boat to get across!", faceHero:"npcA" }
+              ]
+            }
+          ]
+        }
+    },
+    
+    walls: {
+      // well & bucket
+      [utils.asGridCoords(11,12)] : true,
+      [utils.asGridCoords(10,12)] : true,
+      [utils.asGridCoords(10,11)] : true,
+      [utils.asGridCoords(11,11)] : true,
+
+      // left walls
+      [utils.asGridCoords(0,1)] : true,
+      [utils.asGridCoords(0,2)] : true,
+      [utils.asGridCoords(0,3)] : true,
+      [utils.asGridCoords(0,4)] : true,
+      [utils.asGridCoords(0,5)] : true,
+      [utils.asGridCoords(0,6)] : true,
+      [utils.asGridCoords(0,7)] : true,
+      [utils.asGridCoords(0,8)] : true,
+      [utils.asGridCoords(0,9)] : true,
+      [utils.asGridCoords(0,10)] : true,
+      [utils.asGridCoords(0,11)] : true,
+      [utils.asGridCoords(0,12)] : true,
+      [utils.asGridCoords(0,13)] : true,
+      // [utils.asGridCoords(0,14)] : true,
+      [utils.asGridCoords(0,15)] : true,
+      [utils.asGridCoords(0,16)] : true,
+      [utils.asGridCoords(0,17)] : true,
+      [utils.asGridCoords(0,18)] : true,
+
+      // bottom walls
+      [utils.asGridCoords(1,16)] : true,
+      [utils.asGridCoords(2,16)] : true,
+      [utils.asGridCoords(3,16)] : true,
+      [utils.asGridCoords(4,16)] : true,
+      [utils.asGridCoords(5,16)] : true,
+      [utils.asGridCoords(6,16)] : true,
+      [utils.asGridCoords(7,16)] : true,
+      [utils.asGridCoords(8,16)] : true,
+      [utils.asGridCoords(9,16)] : true,
+      [utils.asGridCoords(10,16)] : true,
+      [utils.asGridCoords(11,16)] : true,
+      [utils.asGridCoords(12,16)] : true,
+      [utils.asGridCoords(13,16)] : true,
+      [utils.asGridCoords(14,16)] : true,
+      [utils.asGridCoords(15,16)] : true,
+      [utils.asGridCoords(16,16)] : true,
+      [utils.asGridCoords(17,16)] : true,
+      [utils.asGridCoords(18,16)] : true,
+      [utils.asGridCoords(19,16)] : true,
+
+      // top walls
+      [utils.asGridCoords(1,1)] : true,
+      [utils.asGridCoords(2,1)] : true,
+      [utils.asGridCoords(3,1)] : true,
+      [utils.asGridCoords(4,1)] : true,
+      [utils.asGridCoords(5,1)] : true,
+      [utils.asGridCoords(6,1)] : true,
+
+      // right walls
+      [utils.asGridCoords(6,0)] : true,
+      [utils.asGridCoords(6,1)] : true,
+      [utils.asGridCoords(6,2)] : true,
+      [utils.asGridCoords(7,2)] : true,
+      [utils.asGridCoords(8,2)] : true,
+      [utils.asGridCoords(9,3)] : true,
+      [utils.asGridCoords(10,4)] : true,
+      [utils.asGridCoords(11,5)] : true,
+      [utils.asGridCoords(11,6)] : true,
+      [utils.asGridCoords(12,7)] : true,
+      [utils.asGridCoords(13,8)] : true,
+      [utils.asGridCoords(13,9)] : true,
+      [utils.asGridCoords(13,10)] : true,
+      [utils.asGridCoords(13,11)] : true,
+      [utils.asGridCoords(13,12)] : true,
+      [utils.asGridCoords(13,13)] : true,
+      [utils.asGridCoords(13,14)] : true,
+      [utils.asGridCoords(13,15)] : true,
+      [utils.asGridCoords(13,16)] : true,
+      [utils.asGridCoords(13,17)] : true,
+
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoords(0,14)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "MainRegion3",
+              x: utils.withGrid(18),
+              y: utils.withGrid(14),
+              direction: "left" 
+            }
+          ]
+        }
+      ],
+    }
+  },    
 }

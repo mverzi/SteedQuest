@@ -53,6 +53,23 @@ window.Enemies = {
                 level: 1
             }
         }
+     },
+
+     //Main Region 1
+     "derek": {
+        name: "Derek",
+        src: "/images/characters/people/guy5.png",
+        horses: {
+            "a": {
+                horseId: "n005",
+                maxHp: 65,
+                level: 1
+            },
+            "b": {
+                horseId: "n010",
+                maxHp: 65,
+                level: 1
+            },
+        }
      }
-     
 }
