@@ -15,7 +15,16 @@ window.Actions = {
       success: [
         { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
         { type: "animation", animation: "spin"},
-        { type: "stateChange", damage: 15}
+        { type: "stateChange", damage: 13}
+      ]
+    },
+    astralHoof: {
+      name: "Astral Hoof",
+      description: "Strike your enemy with celestial strength!",
+      success: [
+        { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
+        { type: "animation", animation: "spook", color: "#FFF033" },
+        { type: "stateChange", damage: 25}
       ]
     },
     nuzzlingBondStatus: {
@@ -34,6 +43,15 @@ window.Actions = {
         { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
         { type: "animation", animation: "spook", color: "#0f0f0f" },
         { type: "stateChange", status: { type: "spooky", expiresIn: 3 }}
+      ]
+    },
+    harmonyBurstStatus: {
+      name: "Harmony Burst",
+      description: "Remove status effects!",
+      targetType: "friendly",
+      success: [
+        { type: "textMessage", text: "{CASTER} uses {ACTION}!"},
+        { type: "stateChange", status: { type: "harmony burst", expiresIn: 1 }},
       ]
     },
     //Items

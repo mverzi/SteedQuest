@@ -55,6 +55,25 @@ window.Enemies = {
         }
      },
 
+     //Region 4
+     "mark": {
+        name: "Mark",
+        src: "/images/characters/people/guy2.png",
+        horses: {
+            "a": {
+                horseId: "n011",
+                maxHp: 65,
+                level: 1
+            },
+            "b": {
+                horseId: "n012",
+                maxHp: 70,
+                level: 2
+            },
+        }
+
+     },
+
      //Main Region 1
      "derek": {
         name: "Derek",

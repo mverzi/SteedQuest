@@ -78,4 +78,31 @@ window.Horses = {
         icon: "/images/icons/horseIconBlackWhitePaint.png",
         actions: ["damage1", "spookedStatus", "nuzzlingBondStatus"]
     },
+    //Enemy
+    "n011": {
+        name: "Benny",
+        description: "A strong steed with a stronger heart.",
+        type: HorseTypes.normal,
+        src: "/images/characters/horses/n011.png", 
+        icon: "/images/icons/horseIconRedBay.png",
+        actions: ["damage2", "spookedStatus", "nuzzlingBondStatus"]
+    },
+    //Enemy
+    "n012": {
+        name: "Ketch",
+        description: "He's a catch!.",
+        type: HorseTypes.normal,
+        src: "/images/characters/horses/n012.png", 
+        icon: "/images/icons/horseIconGreyWhiteBlaze.png",
+        actions: ["damage2", "spookedStatus", "nuzzlingBondStatus"]
+    },
+    //Player
+    "u001": {
+        name: "Stardust",
+        description: "A shimmering white unicorn.",
+        type: HorseTypes.unicorn,
+        src: "/images/characters/horses/u001.png", 
+        icon: "/images/icons/unicornIconWhite.png",
+        actions: ["astralHoof", "harmonyBurstStatus", "nuzzlingBondStatus"]
+    }
 }

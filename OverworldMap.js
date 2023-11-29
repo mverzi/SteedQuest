@@ -287,13 +287,6 @@ window.OverworldMaps = {
           storyFlag: "USED_HORSE_SPAWNER_R1",
           horses: ["n006", "n003"]
        },
-       apple: {
-        type: "Apple",
-        id: "apple1",
-        x: utils.withGrid(2),
-        y: utils.withGrid(1),
-        storyFlag: "COLLECTED_APPLE1"
-      },
     },
     walls: {
       [utils.asGridCoords(-1,0)] : true,
@@ -617,7 +610,21 @@ window.OverworldMaps = {
             ]
           }
         ]
-      }
+      },
+      apple: {
+        type: "Apple",
+        id: "apple1",
+        x: utils.withGrid(4),
+        y: utils.withGrid(7),
+        storyFlag: "COLLECTED_APPLE1"
+      },
+      apple2: {
+        type: "Apple",
+        id: "apple2",
+        x: utils.withGrid(16),
+        y: utils.withGrid(6),
+        storyFlag: "COLLECTED_APPLE2"
+      },
     },
     cutsceneSpaces: {
       [utils.asGridCoords(10,19)]: [
@@ -725,6 +732,41 @@ window.OverworldMaps = {
         x: utils.withGrid(2),
         y: utils.withGrid(12),
         src: "/images/characters/people/hero.png",
+      },
+      trainer1: {
+        type: "Person",
+        x: utils.withGrid(5),
+        y: utils.withGrid(8),
+        src: "/images/characters/people/guy2.png",
+        behaviorLoop: [ 
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "walk", direction: "down", time: 2800 },
+          { type: "stand", direction: "down", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "walk", direction: "right", time: 2800 },
+          { type: "stand", direction: "right", time: 2800 },
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "walk", direction: "up" , time: 2800},
+          { type: "stand", direction: "up", time: 2800 },
+          { type: "walk", direction: "left" , time: 2800},
+          { type: "walk", direction: "left" , time: 2800},
+          { type: "stand", direction: "left", time: 2800 },
+        ],
+        talking: [
+          {
+            required: ["BATTLED_MARK"],
+            events: [
+              { type: "textMessage", text: "You are strong, but you're gonna need some better horses soon. I hope you can find some!", faceHero: "trainer1" }
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Let's battle!", faceHero: "trainer1"},
+              { type: "battle", enemyId: "mark" },
+              { type: "addStoryFlag", flag: "BATTLED_MARK" },
+            ]
+          }
+        ]
       },
     },
     cutsceneSpaces: {
@@ -1214,6 +1256,13 @@ window.OverworldMaps = {
             }
           ]
         },
+        horseSpawner: {
+          type: "HorseSpawner",
+          x: utils.withGrid(16),
+          y: utils.withGrid(2),
+          storyFlag: "USED_HORSE_SPAWNER_U1",
+          horses: ["u001"]
+       },
     },
     cutsceneSpaces: {
       [utils.asGridCoords(0,14)]: [

@@ -85,6 +85,13 @@ class Combatant {
 
     getReplacedEvents(originalEvents){
 
+        if (this.status?.type === "harmony burst") {
+            this.status = null; // Remove the "spooky" status
+            return [
+              { type: "textMessage", text: `${this.name} harmonizes and dispels the spooky aura!` }
+            ];
+          }
+
         if(this.status?.type === "spooky" && utils.randomFromArray([true, false, false])) {
             return [
                 { type: "textMessage", text: `${this.name} spooks at the wind!` }
