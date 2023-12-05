@@ -12,6 +12,8 @@ window.Horses = {
         description: "Your very first horse! Some say he is a good luck charm",
         type: HorseTypes.normal,
         src: "/images/characters/horses/n001.png",
+        idleSrc: "/images/characters/horses/HorseIdle.png" ,
+        runSrc: "/images/characters/horses/HorseRun1.png",
         icon: "/images/icons/horseIconBrown.png", 
         actions: ["spookedStatus", "nuzzlingBondStatus", "damage1"]
     },
@@ -21,6 +23,19 @@ window.Horses = {
         description: "A fearless steed, who races through the shadows for you!",
         type: HorseTypes.normal,
         src: "/images/characters/horses/n002.png",
+        idleSrc: "/images/characters/horses/HorseIdle.png" ,
+        runSrc: "/images/characters/horses/HorseRun1.png",
+        icon: "/images/icons/horseIconBlack.png",
+        actions: ["damage1", "nuzzlingBondStatus", "spookedStatus"]
+    },
+
+    "n002A": {
+        name: "Shadow",
+        description: "A fearless steed, who races through the shadows for you!",
+        type: HorseTypes.normal,
+        src: "/images/characters/horses/n010.png",
+        idleSrc: "/images/characters/horses/HorseIdle.png" ,
+        runSrc: "/images/characters/horses/HorseRun1.png",
         icon: "/images/icons/horseIconBlack.png",
         actions: ["damage1", "nuzzlingBondStatus", "spookedStatus"]
     },

@@ -91,6 +91,20 @@ class OverworldEvent {
       });
     }
 
+    race(resolve) {
+      const sceneTransition = new SceneTransition();
+      sceneTransition.init(document.querySelector(".game-container"), () => {
+        const race = new Race({
+          enemy: Enemies[this.event.enemyId],
+          onComplete: (didWin) => {
+            sceneTransition.fadeOut(); 
+            resolve(didWin ? "WON_RACE" : "LOST_RACE");
+          }
+        })
+        race.init(document.querySelector(".game-container"));
+      });
+    }
+
     pause(resolve) {
       this.map.isPaused = true;
         const menu = new PauseMenu({

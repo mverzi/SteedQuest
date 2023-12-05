@@ -52,11 +52,23 @@
     margin:0;
    }
   
-  
-  
    /* Battle specific */
   .Battle .KeyboardMenu {
     right:0;
     bottom:0;
     width: 140px;
   }
+
+  .Race .KeyboardMenu {
+    right:0;
+    bottom:1px;
+    width: 150px;
+  }
+  
+  .Race .DescriptionBox p {
+    font-size: 10px;
+    margin:0;
+    bottom: 5px;
+   }
+  
+  

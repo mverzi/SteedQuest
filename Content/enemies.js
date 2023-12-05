@@ -90,5 +90,34 @@ window.Enemies = {
                 level: 1
             },
         }
+     },
+//MainRegion5 & 6 
+     "beth": {
+        name: "beth",
+        src: "/images/characters/people/trainer2.png",
+        horses: {
+         "a": {
+             hp: 50,
+             horseId: "n002",
+             speed: 2,
+             maxHp: 50,
+             level: 1
+         }
+        } 
+},
+
+    "james": {
+    name: "james",
+    src: "/images/characters/people/guy1.png",
+    horses: {
+     "a": {
+         hp: 50,
+         horseId: "n002A",
+         speed: 2,
+         maxHp: 50,
+         level: 1
      }
+    } 
+}
+
 }

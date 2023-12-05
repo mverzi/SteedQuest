@@ -1,0 +1,143 @@
+.Competitor {
+    width: 67px;
+    height: 14px;
+    background: url("/images/ui/combatant-plate.png") no-repeat no-repeat;
+    position: absolute;
+    right: 0px;
+    top: 10px;
+  }
+  
+  .Race .Competitor {
+    /* transform: scale(2); */
+    transition: opacity 0.4s;
+  }
+  .Race .Competitor[data-active="false"] {
+    opacity: 0;
+  }
+  .Race .Competitor[data-active="true"] {
+    opacity: 1;
+  }
+  
+  .Competitor[data-team="player"] {
+    left: 46px;
+    top: 70px;
+  }
+  .Competitor[data-team="enemy"] {
+    display: none;
+    opacity: 0;
+  }
+  
+  .Competitor_character_crop {
+    position: absolute;
+    bottom: 1px;
+    left:3px;
+    width: 22px;
+    height: 12px;
+    overflow:hidden;
+  }
+  .Competitor_character {
+    display:block;
+    position: absolute;
+    left: -11px;
+    bottom: -7px;
+  }
+  .Race .Competitor_character_crop {
+    display:none;
+  }
+  
+  .Competitor_name {
+    position: absolute;
+    left:-2px;
+    top:-8px;
+    white-space: nowrap;
+    background: var(--menu-font-color);
+    color: #fff;
+    font-size: 5px; /*This is only so small because the component is scaled 2x in battle which is weird */
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 0;
+  }
+  .Competitor_type {
+    position: absolute;
+    left: 3px;
+    top: -2px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .Competitor_life-container {
+    position: absolute;
+    left:20px;
+    top:4px;
+    width: 26px;
+    height: 3px;
+  }
+  .Competitor_life-container > rect {
+    transition: width 0.2s;
+  }
+  
+  .Competitor_xp-container {
+    position: absolute;
+    left:20px;
+    top:8px;
+    width: 26px;
+    height: 2px;
+  }
+  .Competitor_level {
+    position: absolute;
+    font-size: 12px;
+    right: 2px;
+    top: -1px;
+    width: 17px;
+    height: 12px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8C594;
+    border: 1px solid #A48465;
+    margin: 0;
+  }
+  
+  .Competitor_status {
+    position: absolute;
+    font-size: 5px;
+    left: 47px;
+    bottom: -3px;
+    padding-left: 2px;
+    padding-right: 2px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    margin: 0;
+  }
+  .Competitor_status[data-status="saucy"] {
+    color: red;
+  }
+  .Competitor_status[data-status="nuzzling-bond"] {
+    background: #582a79;
+  }
+  
+  .CompetitorHorse {
+      position: absolute;
+      transform: scale(1.3);
+      transition: opacity 0.4s, transform 0.4s;
+      /*background: url(/images/characters/pizzas/pizza-shadow.png) no-repeat no-repeat;*/
+    }
+  
+  .CompetitorHorse[data-team="player"] {
+      bottom: 78px;
+      left: 17px;
+    }
+  .CompetitorHorse[data-team="enemy"] {
+      bottom: 35px;
+      left: 17px;
+    }
+    .Race .CompetitorHorse[data-active="false"] {
+      opacity: 0;
+      transform: translate3d(0,16px,0) scale(1.3);
+  
+    }
+    
+    .Race .CompetitorHorse[data-active="true"] {
+      opacity: 1;
+      transform: translate3d(0,0,0) scale(1.3);
+    }

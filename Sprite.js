@@ -80,10 +80,11 @@ class Sprite {
   
       let [frameX, frameY] = this.frame;
 
-      if (this.gameObject instanceof Apple) {
+      if (this.gameObject instanceof Apple || this.gameObject instanceof Carrot || this.gameObject instanceof Herbs) {
         x += 0;
         y += 4; 
       }
+      
   
       this.isLoaded && ctx.drawImage(this.image,
         frameX * 32, frameY * 32,
