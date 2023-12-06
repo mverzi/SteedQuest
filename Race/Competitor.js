@@ -101,12 +101,14 @@ class Competitor {
     runAnimation() {
       if (!this.isRunning) {
           this.isRunning = true;
-  
+
+          this.competitorHorseElement.src = "images/405.png";
           let frameIndex = 0;
           const frameWidth = 32; // Width of each frame in pixels
           const spriteSheetFrames = 6; // Number of frames in the sprite sheet
   
           // Set runSrc as the background image when the horse starts running
+          
           this.competitorHorseElement.style.backgroundImage = `url(${this.runSrc})`;
           this.competitorHorseElement.style.backgroundSize = `auto ${frameWidth}px`;
   
@@ -127,21 +129,24 @@ class Competitor {
   }
   
   stopRunAnimation() {
-      this.isRunning = false;
-      // Reset the horse to the idle state
-      this.competitorHorseElement.style.backgroundImage = `url(${this.idleSrc})`;
-      this.competitorHorseElement.style.backgroundSize = "auto 32px";
+    this.isRunning = false;
+    
+    // Set the src attribute back to idleSrc when the horse stops running
+    this.competitorHorseElement.src = this.idleSrc;
+
+    // Reset the background image and size to idle state
+    this.competitorHorseElement.style.backgroundImage = "none";
+    this.competitorHorseElement.style.backgroundSize = "auto 32px";
   }
   
   updatePosition() {
     this.x += this.speed;
     this.competitorHorseElement.style.left = `${this.x}px`;
-    this.cameraPosition = 0;
 
     // Call runAnimation when the horse starts running
     if (this.speed > 0 && !this.isRunning) {
         this.runAnimation();
-    } else if (this.speed === 0 && this.isRunning) {
+    } else if (this.x >= 300) {
         // Call stopRunAnimation when the horse stops running
         this.stopRunAnimation();
     }
